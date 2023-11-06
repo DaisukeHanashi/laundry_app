@@ -72,7 +72,7 @@ class _BottomBarState extends State<BottomBar> {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.bChet)),
+          icon: ImageIcon(AssetImage(AppImages.bChat)),
           label: '',
         ),
         BottomNavigationBarItem(

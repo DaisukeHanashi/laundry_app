@@ -6,16 +6,16 @@ import '../utils/app_button.dart';
 import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
-import 'second_splash_screen.dart';
+import 'third_splash_screen.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SecondSplashScreen extends StatefulWidget {
+  const SecondSplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SecondSplashScreen> createState() => _SecondSplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SecondSplashScreenState extends State<SecondSplashScreen> {
   void updateAppbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark );
   }
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         clipBehavior: Clip.none,
         width: MediaQuery.of(context).size.width,
         height: 629.h,
-        child: Image.asset('assets/splash.png',fit: BoxFit.cover,),
+        child: Image.asset('assets/splash 1.png',fit: BoxFit.cover,),
       ),
     );
   }
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.h),
           child: CustomText(
-            text: AppText.appMotive1,
+            text: AppText.appMotive2,
             textAlign: TextAlign.center,
             fontSize: 24.sp,
             fontWeight: FontWeight.w700,
@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.h),
           child: CustomText(
-            text: AppText.appDescription1,
+            text: AppText.appDescription2,
             textAlign: TextAlign.center,
             fontSize: 16.sp,
             textColor: Colors.grey,
@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget getStartedButton(){
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const SecondSplashScreen(),));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const ThirdSplashScreen(),));
       },
       child: const AppButton(
         buttonText: 'Next',

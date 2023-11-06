@@ -1,5 +1,5 @@
 class  AppImages {
-  static const String assetsPath = "assets/images/";
+  static const String assetsPath = "assets/";
 
   static int currentIndex = 0;
 
@@ -20,7 +20,7 @@ class  AppImages {
   static const String bookMark = "${assetsPath}Bookmark.png";
   static const String right = "${assetsPath}true.png";
   static const String bHome = "${assetsPath}bHome.png";
-  static const String bChet = "${assetsPath}chat.png";
+  static const String bChat = "${assetsPath}chat.png";
   static const String bDiscover = "${assetsPath}bDiscovery.png";
   static const String bProfile = "${assetsPath}bProfile.png";
   // static const String repair = "${assetsPath}Repairing.png";

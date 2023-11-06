@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:laundry_app/screens/login.dart';
 import '../../custom/half_circle_custom.dart';
 import '../utils/app_button.dart';
 import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
-import 'second_splash_screen.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class ThirdSplashScreen extends StatefulWidget {
+  const ThirdSplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<ThirdSplashScreen> createState() => _ThirdSplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _ThirdSplashScreenState extends State<ThirdSplashScreen> {
   void updateAppbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark );
   }
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         clipBehavior: Clip.none,
         width: MediaQuery.of(context).size.width,
         height: 629.h,
-        child: Image.asset('assets/splash.png',fit: BoxFit.cover,),
+        child: Image.asset('assets/splash 2.png',fit: BoxFit.cover,),
       ),
     );
   }
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.h),
           child: CustomText(
-            text: AppText.appMotive1,
+            text: AppText.appMotive3,
             textAlign: TextAlign.center,
             fontSize: 24.sp,
             fontWeight: FontWeight.w700,
@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.h),
           child: CustomText(
-            text: AppText.appDescription1,
+            text: AppText.appDescription3,
             textAlign: TextAlign.center,
             fontSize: 16.sp,
             textColor: Colors.grey,
@@ -90,10 +90,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget getStartedButton(){
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const SecondSplashScreen(),));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const Login(),));
       },
       child: const AppButton(
-        buttonText: 'Next',
+        buttonText: 'Get Started',
       ),
     );
   }
