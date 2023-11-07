@@ -1,11 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/screens/bottom_bar.dart';
 
-import 'sign_up.dart';
+import 'verify.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +32,9 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 150),
+                const SizedBox(height: 130),
                 Container(
-                  height: 400,
+                  height: 500,
                   width: 325,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -47,9 +45,20 @@ class Login extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 15),
+                        const Center(
+                          child: Text(
+                            'Create an account',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
                         const Text(
-                          'Email/Username',
+                          'Name',
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.black,
@@ -65,13 +74,43 @@ class Login extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 15),
+                        const Text(
+                          'Email Address',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        const SizedBox(
+                          width: 280,
+                          height: 40,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        const Text(
+                          'Phone Number',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        const SizedBox(height: 5),
+                        const SizedBox(
+                          width: 280,
+                          height: 40,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
                         const Text(
                           'Password',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                          ),
+                          style: TextStyle(color: Colors.black),
                         ),
                         const SizedBox(height: 5),
                         const SizedBox(
@@ -81,27 +120,6 @@ class Login extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  // Handle "Forgot password?" action
-                                },
-                                child: const Text(
-                                  'Forgot password?',
-                                  style: TextStyle(
-                                    color: Color(0xFF52CBBE),
-                                    decoration: TextDecoration.underline,
-                                    decorationThickness: 2,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -109,7 +127,7 @@ class Login extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const BottomBar()),
+                              MaterialPageRoute(builder: (context) => const Verify()),
                             );
                           },
                           child: Container(
@@ -123,7 +141,7 @@ class Login extends StatelessWidget {
                             child: const Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                'Login',
+                                'Sign Up',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
@@ -133,35 +151,39 @@ class Login extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        Center(
-                          child: RichText(
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(text: "Don't have an account? "),
-                                TextSpan(
-                                  text: 'Sign Up',
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF52CBBE),
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => const SignUp()),
-                                      );
-                                    },
-                                ),
-                              ],
+                        const SizedBox(height: 15),
+                        RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade400,
                             ),
+                            children: const <TextSpan>[
+                              TextSpan(
+                                text: 'By selecting Sign up, you agree to our ',
+                              ),
+                              TextSpan(
+                                text: 'Terms',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              TextSpan(
+                                text: ' and have Read and acknowledge our ',
+                              ),
+                              TextSpan(
+                                text: 'Privacy Policy',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.red,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),

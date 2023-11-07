@@ -19,9 +19,9 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 3000), () {
+    await Future.delayed(const Duration(milliseconds: 2000), () {
       Navigator.pushReplacement(
-        _capturedContext, // Use the captured context
+        _capturedContext, 
         MaterialPageRoute(builder: (context) => const SplashScreen()),
       );
     });
@@ -31,11 +31,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 5,
-            color: const Color(0xFF5DE0E6),
-          ),
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Center(
