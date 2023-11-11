@@ -29,6 +29,7 @@ class Login extends StatelessWidget {
                   child: Text(
                     'LaundryMate',
                     style: TextStyle(
+                      fontFamily: 'Garet-Book',
                       fontSize: 30,
                       color: Color(0xFF52CBBE),
                     ),
@@ -51,6 +52,7 @@ class Login extends StatelessWidget {
                         const Text(
                           'Email/Username',
                           style: TextStyle(
+                            fontFamily: 'Garet-Book',
                             fontSize: 15,
                             color: Colors.black,
                           ),
@@ -69,6 +71,7 @@ class Login extends StatelessWidget {
                         const Text(
                           'Password',
                           style: TextStyle(
+                            fontFamily: 'Garet-Book',
                             fontSize: 15,
                             color: Colors.black,
                           ),
@@ -95,6 +98,7 @@ class Login extends StatelessWidget {
                                 child: const Text(
                                   'Forgot password?',
                                   style: TextStyle(
+                                    fontFamily: 'Garet-Book',
                                     color: Color(0xFF52CBBE),
                                     decoration: TextDecoration.underline,
                                     decorationThickness: 2,
@@ -125,6 +129,7 @@ class Login extends StatelessWidget {
                               child: Text(
                                 'Login',
                                 style: TextStyle(
+                                  fontFamily: 'Garet-Book',
                                   fontSize: 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -146,6 +151,7 @@ class Login extends StatelessWidget {
                                 TextSpan(
                                   text: 'Sign Up',
                                   style: const TextStyle(
+                                    fontFamily: 'Garet-Book',
                                     fontSize: 14,
                                     color: Color(0xFF52CBBE),
                                     decoration: TextDecoration.underline,

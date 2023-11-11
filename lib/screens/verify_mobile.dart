@@ -27,6 +27,7 @@ class VerifyMobile extends StatelessWidget {
                 const Text(
                   'LaundryMate',
                   style: TextStyle(
+                    fontFamily: 'Garet-Book',
                     fontSize: 30,
                     color: Color(0xFF52CBBE),
                   ),
@@ -48,6 +49,7 @@ class VerifyMobile extends StatelessWidget {
                         const Text(
                           'Please Verify your Number',
                           style: TextStyle(
+                            fontFamily: 'Garet-Book',
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -67,6 +69,7 @@ class VerifyMobile extends StatelessWidget {
                             child: Text(
                               'A verification code has been sent to +639****622',
                               style: TextStyle(
+                                fontFamily: 'Garet-Book',
                                 fontSize: 15,
                                 color: Color(0xFF707070),
                               ),
@@ -80,6 +83,7 @@ class VerifyMobile extends StatelessWidget {
                             child: Text(
                               'Please check your inbox and enter the verification code below to verify your number. The code will expire in 45s.',
                               style: TextStyle(
+                                fontFamily: 'Garet-Book',
                                 fontSize: 13,
                                 color: Color(0xFF707070),
                               ),
@@ -174,6 +178,7 @@ class VerifyMobile extends StatelessWidget {
                               child: Text(
                                 'Verify',
                                 style: TextStyle(
+                                  fontFamily: 'Garet-Book',
                                   fontSize: 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -190,6 +195,7 @@ class VerifyMobile extends StatelessWidget {
                             children: [
                               const Text('Resend Code',
                               style: TextStyle(
+                                fontFamily: 'Garet-Book',
                                 fontSize: 14,
                                 color: Color(0xFF737373), 
                               ),
@@ -205,6 +211,7 @@ class VerifyMobile extends StatelessWidget {
                                 },
                               child: const Text('Send to Email',
                               style: TextStyle(
+                                fontFamily: 'Garet-Book',
                                 fontSize: 14,
                                 color: Color(0xFF0E5C46),
                                 decoration: TextDecoration.underline,

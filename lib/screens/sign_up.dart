@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'verify.dart';
+import 'verify_account.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -34,7 +33,7 @@ class SignUp extends StatelessWidget {
                 ),
                 const SizedBox(height: 130),
                 Container(
-                  height: 500,
+                  height: 480,
                   width: 325,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -127,7 +126,7 @@ class SignUp extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Verify()),
+                              MaterialPageRoute(builder: (context) => const VerifyAccount()),
                             );
                           },
                           child: Container(
@@ -141,7 +140,7 @@ class SignUp extends StatelessWidget {
                             child: const Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                'Sign Up',
+                                'Next',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
