@@ -1,5 +1,5 @@
 class AppText {
-  static const String bannerText = 'Discount On All Dishesh The Categories';
+  static const String bannerText = 'Discount on Every Friday';
   static const String appMotive1 = 'Bringing Freshness to Your Fabrics';
   static const String appDescription1 ='Savor the Cleanliness, Bring Back the Shine, and Give Your Clothes the Best Care.';
   static const String appMotive2 = 'Renew Your Wardrobe with Our Expert Care';
@@ -30,7 +30,8 @@ class AppText {
   // static const String  repairerRate = '\$20.00-05.00';
   static const String pcs = '/pcs';
   static const String bestFind = 'Domain Best Find Launder';
-  static const String currentLocation = 'Manarvrut, South india';
+  static const String userName = 'John Doe';
+  static const String currentLocation = 'Cebu City';
   static const String orderItem = 'Order Items';
   static const String item1 = 'Kitchen Cleaning';
   static const String item2 = 'Bathroom Cleaning';

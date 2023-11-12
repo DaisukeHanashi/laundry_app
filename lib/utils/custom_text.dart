@@ -17,7 +17,7 @@ class CustomText extends StatelessWidget {
       color: textColor ??AppColor.appFont,
       fontWeight: fontWeight??FontWeight.w700,
       fontSize:fontSize,
-      fontFamily: 'CircularStd',
+      fontFamily: 'Garet-Book',
 
     ),textAlign:textAlign?? TextAlign.center,);
   }

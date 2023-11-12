@@ -8,14 +8,9 @@ class  AppImages {
   static const String location = "${assetsPath}Location.png";
   static const String bannerImage = "${assetsPath}banner.png";
   static const String cleaning = "${assetsPath}cleaning.png";
-  static const String plumbing = "${assetsPath}plumber.png";
   static const String laundry = "${assetsPath}laundry.png";
-  static const String carWash= "${assetsPath}car-wash.png";
-  static const String repair = "${assetsPath}Repairing.png";
   static const String star = "${assetsPath}Star.png";
   static const String laundryPerson = "${assetsPath}laundryperson.png";
-  static const String plumberPerson = "${assetsPath}plumberperson.png";
-  static const String repairingPerson = "${assetsPath}repairingperson.png";
   static const String detailsBack = "${assetsPath}laundrydetailswallpaper.png";
   static const String bookMark = "${assetsPath}Bookmark.png";
   static const String right = "${assetsPath}true.png";
@@ -23,6 +18,6 @@ class  AppImages {
   static const String bChat = "${assetsPath}chat.png";
   static const String bDiscover = "${assetsPath}bDiscovery.png";
   static const String bProfile = "${assetsPath}bProfile.png";
-  // static const String repair = "${assetsPath}Repairing.png";
+  static const String settings = "${assetsPath}settings.png";
 
 }
