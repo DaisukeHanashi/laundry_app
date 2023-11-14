@@ -7,10 +7,10 @@ import '../utils/app_image.dart';
 import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
-import '../utils/order_item.dart';
-import '../utils/pickup_date.dart';
-import '../utils/pickup_model.dart';
-import '../utils/pickup_time.dart';
+import '../widget/order_item.dart';
+import '../widget/pickup_date.dart';
+import '../widget/pickup_model.dart';
+import '../widget/pickup_time.dart';
 
 
 class ServiceDetailScreen extends StatefulWidget {

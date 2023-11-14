@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:laundry_app/screens/bottom_bar.dart';
+import 'package:laundry_app/widget/bottom_bar.dart';
 import 'verify.dart';
 
 class VerifyMobile extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'app_image.dart';
-import 'app_string.dart';
+import '../utils/app_image.dart';
+import '../utils/app_string.dart';
 
 
 class WorkCategories {

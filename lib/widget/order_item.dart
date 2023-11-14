@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/custom_text.dart';
-import 'app_color.dart';
-import 'app_image.dart';
+import '../utils/app_color.dart';
+import '../utils/app_image.dart';
 
 // ignore: must_be_immutable
 class SelectOrderItem extends StatefulWidget {

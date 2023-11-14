@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/screens/bottom_bar.dart';
+import 'package:laundry_app/widget/bottom_bar.dart';
 
 import 'sign_up.dart';
 

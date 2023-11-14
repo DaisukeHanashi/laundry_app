@@ -10,8 +10,9 @@ import '../utils/app_color.dart';
 import '../utils/app_image.dart';
 import '../utils/app_space.dart';
 import '../utils/custom_text.dart';
-import '../utils/work_categories.dart';
-import '../utils/work_categories_model.dart';
+import '../widget/search_container.dart';
+import '../widget/work_categories.dart';
+import '../widget/work_categories_model.dart';
 import 'service_detail_screen.dart';
 
 
@@ -36,9 +37,11 @@ class _HomeState extends State<Home> {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-           AppSpace( height: 16.h,
+           AppSpace( height: 35.h,
            ),
             appBar(),
+            SizedBox(height: 10.h,),
+            const SearchContainer(),
             slider(),
             SizedBox(height: 10.h,),
             dotIndicator(),
@@ -54,7 +57,7 @@ class _HomeState extends State<Home> {
     );
   }
   Widget  appBar (){ return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 20.h),
+      padding:  EdgeInsets.symmetric(horizontal: 25.h),
       child: Column(
         children: [
           Row(
@@ -62,36 +65,29 @@ class _HomeState extends State<Home> {
               CustomText(
                 textColor: AppColor.appFont,
                 fontWeight: FontWeight.w400,
-                fontSize: 20.sp,
+                fontSize: 25.sp,
                 textAlign: TextAlign.start,
                 text: 'Hello,',
               ),
               const Spacer(),
-              Image.asset(AppImages.bell,height: 24.h,),
+              Image.asset(AppImages.bell,height: 30.h,),
               SizedBox(
                 width: 16.h,
               ),
-              Image.asset(AppImages.search,height: 24.h,),
+              Image.asset(AppImages.settings,height: 30.h,),
             ],
           ),
           Row(
             children: [
-              Image.asset(AppImages.location,height: 16.h,),
-              SizedBox(
-                width: 8.h,
-              ),
               CustomText(
                 textColor: AppColor.appFont,
                 fontWeight: FontWeight.w400,
-                fontSize: 16.sp,
+                fontSize: 20.sp,
                 textAlign: TextAlign.start,
-                text: AppText.currentLocation,
+                text: AppText.userName,
               ),
-
-
             ],
           ),
-
         ],
       ),
     ); 

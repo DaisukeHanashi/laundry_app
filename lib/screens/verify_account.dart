@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/screens/bottom_bar.dart';
+import 'package:laundry_app/widget/bottom_bar.dart';
 import 'package:image_picker/image_picker.dart';
 
 class VerifyAccount extends StatefulWidget {

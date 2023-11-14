@@ -1,4 +1,4 @@
-import 'app_string.dart';
+import '../utils/app_string.dart';
 
 class PickupModel{
   String? day;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'app_color.dart';
-import 'custom_text.dart';
+import '../utils/app_color.dart';
+import '../utils/custom_text.dart';
 
 class PickUpTime extends StatelessWidget {
   final bool  isPressed ;

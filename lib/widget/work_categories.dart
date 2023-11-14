@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'app_color.dart';
-import 'app_image.dart';
-import 'app_space.dart';
-import 'app_string.dart';
-import 'custom_text.dart';
+import '../utils/app_color.dart';
+import '../utils/app_image.dart';
+import '../utils/app_space.dart';
+import '../utils/app_string.dart';
+import '../utils/custom_text.dart';
 
 
 class Categories extends StatelessWidget {
