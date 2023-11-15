@@ -14,23 +14,20 @@ class WorkCategories {
 }
 List<WorkCategories> categoriesModel = [
   WorkCategories(
-    image: AppImages.laundry,
-    name: AppText.laundry,
+    image: AppImages.washiron,
+    name: AppText.item1,
   ),
   WorkCategories(
-    image: AppImages.laundry,
-    name: AppText.plumbing,
+    image: AppImages.washfold,
+    name: AppText.item2,
+  ),WorkCategories(
+    image: AppImages.dryclean,
+    name: AppText.item3,
   ),WorkCategories(
     image: AppImages.laundry,
-    name: AppText.laundry,
-  ),WorkCategories(
-    image: AppImages.laundry,
-    name: AppText.carWash,
+    name: AppText.item4,
   ),
-  WorkCategories(
-    image: AppImages.laundry,
-    name: AppText.laundry,
-  ),
+  
 
 ];
 
@@ -51,32 +48,63 @@ class ServicesDetails {
 }
 List<ServicesDetails>  servicesDetails =[
   ServicesDetails(
-    image: AppImages.laundryPerson,
-    title: AppText.laundry,
-    placeFar: AppText.laundry,
-    rating: AppText.laundry,
-    rate: AppText.laundry,
+    image: AppImages.berryclean,
+    title: AppText.shop,
+    placeFar: AppText.location1,
+    rating: AppText.rate,
+    rate: AppText.price,
   ),
   ServicesDetails(
-    image: AppImages.laundryPerson,
-    title: AppText.laundry,
-    placeFar: AppText.laundry,
-    rating: AppText.laundry,
-    rate: AppText.laundry,
+    image: AppImages.rinse,
+    title: AppText.shop1,
+    placeFar: AppText.location2,
+    rating: AppText.rate1,
+    rate: AppText.price,
   ),
   ServicesDetails(
-    image: AppImages.laundryPerson,
-    title: AppText.laundry,
-    placeFar: AppText.laundry,
-    rating: AppText.laundry,
-    rate: AppText.laundry,
+    image: AppImages.tumbledry,
+    title: AppText.shop2,
+    placeFar: AppText.location3,
+    rating: AppText.rate2,
+    rate: AppText.price,
   ),
   ServicesDetails(
-    image: AppImages.laundryPerson,
-    title: AppText.laundry,
-    placeFar: AppText.laundry,
-    rating: AppText.laundry,
-    rate: AppText.laundry,
+    image: AppImages.washerman,
+    title: AppText.shop3,
+    placeFar: AppText.location4,
+    rating: AppText.rate3,
+    rate: AppText.price,
   ),
+
+];
+
+class ServiceImage {
+  String? image;
+  String? name;
+
+  ServiceImage({
+    this.image,
+    this.name,
+
+  });
+}
+List<ServiceImage> serviceModel = [
+  ServiceImage(
+    image: AppImages.berryclean,
+    name: AppText.item1,
+  ),
+  ServiceImage(
+    image: AppImages.rinse,
+    name: AppText.item2,
+  ),
+  ServiceImage(
+    image: AppImages.tumbledry,
+    name: AppText.item3,
+  ),
+  ServiceImage(
+    image: AppImages.washerman,
+    name: AppText.item4,
+  ),
+  
 
 ];

@@ -26,7 +26,10 @@ class PopularShops extends StatelessWidget {
         padding:  EdgeInsets.all(8.h),
         child: Row(
           children: [
-            Image.asset(image??AppImages.laundryPerson),
+            Image.asset(image??AppImages.berryclean,
+            width: 80.h,
+            height: 80.h
+            ),
             SizedBox(
               width: 16.h,
             ),
@@ -42,7 +45,7 @@ class PopularShops extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         CustomText(
-          text: title??AppText.laundry,
+          text: title??AppText.shop,
           fontWeight: FontWeight.w500 ,
           textColor: AppColor.appFont,
           fontSize: 16.sp,
@@ -55,7 +58,7 @@ class PopularShops extends StatelessWidget {
               width: 4.h,
             ),
             CustomText(
-              text: far??AppText.laundry,
+              text: far??AppText.currentLocation,
               fontWeight: FontWeight.w400 ,
               textColor: const Color(0xFF707070),
               fontSize: 16.sp,
@@ -68,7 +71,7 @@ class PopularShops extends StatelessWidget {
               width: 4.h,
             ),
             CustomText(
-              text: rating??AppText.laundry,
+              text: rating??AppText.pcs,
               fontWeight: FontWeight.w400 ,
               textColor: const Color(0xFF707070),
               fontSize: 16.sp,
@@ -77,7 +80,7 @@ class PopularShops extends StatelessWidget {
         ),
         RichText(
           text: TextSpan(
-            text: price?? AppText.laundry,
+            text: price?? AppText.price,
             style: TextStyle(
               color: AppColor.appFont,
               fontSize: 16.sp,

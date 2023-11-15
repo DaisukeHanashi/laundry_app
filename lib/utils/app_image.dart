@@ -10,7 +10,14 @@ class  AppImages {
   static const String cleaning = "${assetsPath}cleaning.png";
   static const String laundry = "${assetsPath}laundry.png";
   static const String star = "${assetsPath}Star.png";
+  static const String washiron = "${assetsPath}iron.png";
+  static const String dryclean = "${assetsPath}dry.png";
+  static const String washfold = "${assetsPath}basket.png";
   static const String laundryPerson = "${assetsPath}laundryperson.png";
+  static const String berryclean = "${assetsPath}berryclean.jpg";
+  static const String tumbledry = "${assetsPath}tumbledry.jpg";
+  static const String washerman = "${assetsPath}washerman.png";
+  static const String rinse = "${assetsPath}rinse.png";
   static const String detailsBack = "${assetsPath}laundrydetailswallpaper.png";
   static const String bookMark = "${assetsPath}Bookmark.png";
   static const String right = "${assetsPath}true.png";

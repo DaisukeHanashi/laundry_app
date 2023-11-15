@@ -3,7 +3,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:laundry_app/screens/popular_shops.dart';
+import 'package:laundry_app/widget/popular_shops.dart';
 import '../../utils/app_string.dart';
 import '../utils/app_banner.dart';
 import '../utils/app_color.dart';
@@ -14,6 +14,7 @@ import '../widget/search_container.dart';
 import '../widget/work_categories.dart';
 import '../widget/work_categories_model.dart';
 import 'service_detail_screen.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -177,7 +178,8 @@ class _HomeState extends State<Home> {
             return GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailScreen(
-                 serviceDetail: ServiceDetail(index, rating: '5'),
+                 serviceDetail: ServiceDetail( index, rating: '4.5'),
+                 selectedImage: servicesDetails[index].image,
                 ),
                 ),
                 );
