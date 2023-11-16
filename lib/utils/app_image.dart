@@ -23,6 +23,8 @@ class  AppImages {
   static const String right = "${assetsPath}true.png";
   static const String bHome = "${assetsPath}bHome.png";
   static const String bChat = "${assetsPath}chat.png";
+  static const String time = "${assetsPath}clock.png";
+  static const String berryLocation = "${assetsPath}berryLocation.png";
   static const String bDiscover = "${assetsPath}bDiscovery.png";
   static const String bProfile = "${assetsPath}bProfile.png";
   static const String settings = "${assetsPath}settings.png";

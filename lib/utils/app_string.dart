@@ -14,6 +14,10 @@ class AppText {
   static const String nearestLaundry = 'Popular Shops';
   static const String categories = 'Categories';
   static const String view = 'View All';
+  static const String delivery = 'Delivery Fee';
+  static const String deliveryInfo = 'Delivery fee is charged based on time of day and distance.';
+  static const String minimum = 'Minimum order';
+  static const String minimumInfo = 'For orders below 109.00, we charge a small order fee';
 
 
   static const String pcs = '/pcs';
@@ -39,7 +43,8 @@ class AppText {
   static const String thu = 'Thu';
   static const String fri = 'Fri';
   static const String totalPrice = 'Total Price';
-   static const String available = 'Now Open';
+  static const String available = 'Now Open until 10:00';
+  static const String schedule = 'Monday-Sunday 7:00-10:00';
   static const String price = '10.00';
   static const String rate = '4.5';
   static const String rate1 = '4.3';

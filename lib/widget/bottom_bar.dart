@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../screens/favorites.dart';
+import '../screens/messaging.dart';
+import '../screens/profile.dart';
 import '../utils/app_color.dart';
 import '../utils/app_image.dart';
 import '../screens/home.dart';
@@ -18,18 +21,10 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> screenList = [
     const Home(),
-    Container(height: 200,
-       width: 200,
-       color: Colors.red,
-     ),
-    Container(height: 200,
-      width: 200,
-      color: Colors.green,
-    ),
-    Container(height: 200,
-      width: 200,
-      color: Colors.blue,
-    ),
+    const Messaging(),
+    const Favorites(),
+    const Profile(),
+    
   ];
 
   void onItemTapped(int index) {
@@ -76,7 +71,7 @@ class _BottomBarState extends State<BottomBar> {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.bDiscover)),
+          icon: ImageIcon(AssetImage(AppImages.bookMark)),
           label: '',
         ),
         BottomNavigationBarItem(
