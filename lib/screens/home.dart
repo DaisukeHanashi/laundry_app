@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                 fontWeight: FontWeight.w400,
                 fontSize: 25.sp,
                 textAlign: TextAlign.start,
-                text: 'Hello,',
+                text: 'Welcome,',
               ),
               const Spacer(),
               Image.asset(AppImages.bell,height: 30.h,),
@@ -98,7 +98,6 @@ class _HomeState extends State<Home> {
       dotsCount: 5,
       position: i,
       decorator: DotsDecorator(
-
         size:  Size.square(8.0.h),
         activeSize:  Size(8.0, 8.0.h),
         color: const Color(0xFFEAEAEA),
