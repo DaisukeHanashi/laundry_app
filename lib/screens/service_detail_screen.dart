@@ -7,6 +7,7 @@ import '../utils/app_image.dart';
 import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
+import '../utils/favorite_manager.dart';
 import '../widget/work_categories.dart';
 import '../utils/work_categories_model.dart';
 import 'more_info.dart';
@@ -23,11 +24,12 @@ class ServiceDetailScreen extends StatefulWidget {
 }
 
 class ServiceDetail {
+  final String name;
   final String rating;
-  
 
- ServiceDetail(int index, {required this.rating});
+ ServiceDetail({required this.name, required this.rating});
 }
+List<ServiceDetail> favoriteServices = [];
 
 class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   bool isPressed = false;
@@ -118,7 +120,24 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                 SizedBox(
                   width: 344.h,
                 ),
-                Image.asset(AppImages.bookMark, height: 24.h, width: 24.h),
+               GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isPressed = !isPressed;
+
+                      if (isPressed) {
+                        FavoritesManager.addToFavorites(widget.serviceDetail);
+                      } else {
+                        FavoritesManager.removeFromFavorites(widget.serviceDetail);
+                      }
+                    });
+                  },
+                  child: Icon(
+                    Icons.bookmark,
+                    size: 24.h,
+                    color: isPressed ? Colors.red : AppColor.appColor,
+                  ),
+                ),
               ],
             ),
           ),
