@@ -1,5 +1,5 @@
-import '../utils/app_image.dart';
-import '../utils/app_string.dart';
+import 'app_image.dart';
+import 'app_string.dart';
 
 
 class WorkCategories {
@@ -105,6 +105,43 @@ List<ServiceImage> serviceModel = [
     image: AppImages.washerman,
     name: AppText.item4,
   ),
-  
-
 ];
+
+class StoreNames {
+  String? image;
+  String? name;
+
+  StoreNames({
+    this.image,
+    this.name,
+
+  });
+}
+List<StoreNames> storeNames = [
+  StoreNames(
+    image: AppImages.berryclean,
+    name: AppText.shop,
+  ),
+  StoreNames(
+    image: AppImages.rinse,
+    name: AppText.shop1,
+  ),
+  StoreNames(
+    image: AppImages.tumbledry,
+    name: AppText.shop2,
+  ),
+  StoreNames(
+    image: AppImages.washerman,
+    name: AppText.shop3,
+  ),
+];
+
+class Message {
+  String sender;
+  String text;
+
+  Message({
+    required this.sender,
+    required this.text,
+  });
+}

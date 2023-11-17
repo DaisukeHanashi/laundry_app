@@ -8,7 +8,7 @@ import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../widget/work_categories.dart';
-import '../widget/work_categories_model.dart';
+import '../utils/work_categories_model.dart';
 import 'more_info.dart';
 import 'see_reviews.dart';
 

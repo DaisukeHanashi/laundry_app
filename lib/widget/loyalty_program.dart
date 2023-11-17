@@ -8,6 +8,7 @@ class LoyaltyProgram extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('LaundryMate Loyalty'),
+         backgroundColor: const Color(0xFF0E5C46),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

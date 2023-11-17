@@ -23,7 +23,7 @@ class Profile extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Profile', style: TextStyle(fontSize: 24)),
         centerTitle: true,
         backgroundColor: const Color(0xFF0E5C46),
         automaticallyImplyLeading: false,

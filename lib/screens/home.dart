@@ -12,7 +12,7 @@ import '../utils/app_space.dart';
 import '../utils/custom_text.dart';
 import '../widget/search_container.dart';
 import '../widget/work_categories.dart';
-import '../widget/work_categories_model.dart';
+import '../utils/work_categories_model.dart';
 import 'service_detail_screen.dart';
 
 

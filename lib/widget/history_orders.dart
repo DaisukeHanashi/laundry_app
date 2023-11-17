@@ -8,6 +8,7 @@ class HistoryOrders extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Order History'),
+         backgroundColor: const Color(0xFF0E5C46),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

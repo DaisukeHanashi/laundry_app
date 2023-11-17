@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../screens/shop_details.dart';
 
 class SearchContainer extends StatefulWidget {
