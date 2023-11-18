@@ -16,8 +16,8 @@ import 'see_reviews.dart';
 class ServiceDetailScreen extends StatefulWidget {
   final ServiceDetail serviceDetail;
   final String? selectedImage;
-  const ServiceDetailScreen({super.key, required this.serviceDetail, this.selectedImage});
-  
+  const ServiceDetailScreen(
+      {super.key, required this.serviceDetail, this.selectedImage});
 
   @override
   State<ServiceDetailScreen> createState() => _ServiceDetailScreenState();
@@ -26,9 +26,11 @@ class ServiceDetailScreen extends StatefulWidget {
 class ServiceDetail {
   final String name;
   final String rating;
+  final String image;
 
- ServiceDetail({required this.name, required this.rating});
+  ServiceDetail({required this.name, required this.rating, required this.image});
 }
+
 List<ServiceDetail> favoriteServices = [];
 
 class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
@@ -46,8 +48,9 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     return Scaffold(
       extendBodyBehindAppBar: false,
       backgroundColor: AppColor.appColor,
@@ -87,10 +90,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
     );
   }
 
-    Widget servicesImage(String? selectedImage) {
+  Widget servicesImage(String? selectedImage) {
     return Stack(
       children: [
-        Image.asset(selectedImage ?? AppImages.detailsBack),  
+        Image.asset(selectedImage ?? AppImages.detailsBack),
         Container(
           height: 240.h,
           decoration: const BoxDecoration(
@@ -115,12 +118,13 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(Icons.arrow_back_ios_new_rounded, size: 24.h, color: AppColor.appColor),
+                  child: Icon(Icons.arrow_back_ios_new_rounded,
+                      size: 24.h, color: AppColor.appColor),
                 ),
                 SizedBox(
                   width: 344.h,
                 ),
-               GestureDetector(
+                GestureDetector(
                   onTap: () {
                     setState(() {
                       isPressed = !isPressed;
@@ -128,14 +132,16 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                       if (isPressed) {
                         FavoritesManager.addToFavorites(widget.serviceDetail);
                       } else {
-                        FavoritesManager.removeFromFavorites(widget.serviceDetail);
+                        FavoritesManager.removeFromFavorites(
+                            widget.serviceDetail);
                       }
                     });
                   },
-                  child: Icon(
-                    Icons.bookmark,
-                    size: 24.h,
-                    color: isPressed ? Colors.red : AppColor.appColor,
+                  child: Image.asset(
+                    AppImages.bookMark,
+                    width: 24.h,
+                    height: 24.h,
+                    color: isPressed ? Colors.green : AppColor.appColor,
                   ),
                 ),
               ],
@@ -189,19 +195,19 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
               ),
               const Spacer(),
               GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MoreInfo()),
-                );
-              },
-              child: CustomText(
-                text: AppText.info,
-                textAlign: TextAlign.start,
-                textColor: const Color(0xFF0E5C46),
-                fontWeight: FontWeight.w500,
-                fontSize: 14.sp,
-              ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MoreInfo()),
+                  );
+                },
+                child: CustomText(
+                  text: AppText.info,
+                  textAlign: TextAlign.start,
+                  textColor: const Color(0xFF0E5C46),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
               ),
             ],
           ),
@@ -238,18 +244,18 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
               const Spacer(),
               GestureDetector(
                 onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SeeReviews()),
-                );
-              },
-              child: CustomText(
-                text: AppText.reviews,
-                textAlign: TextAlign.start,
-                textColor: const Color(0xFF0E5C46),
-                fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
-              ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SeeReviews()),
+                  );
+                },
+                child: CustomText(
+                  text: AppText.reviews,
+                  textAlign: TextAlign.start,
+                  textColor: const Color(0xFF0E5C46),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.sp,
+                ),
               ),
             ],
           ),
@@ -318,43 +324,43 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.h),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => Categories(
-            image: categoriesModel[index].image,
-            type: categoriesModel[index].name,
-          ),
+                image: categoriesModel[index].image,
+                type: categoriesModel[index].name,
+              ),
           separatorBuilder: (context, index) => SizedBox(
-            width: 20.h,
-          ),
+                width: 20.h,
+              ),
           itemCount: categoriesModel.length),
     );
   }
 
   Widget priceList() {
-  return SizedBox(
-    height: 69.h,
-    child: ListView.separated(
-      physics: const BouncingScrollPhysics(),
-      padding: EdgeInsets.only(left: 20.h, top: 16.h),
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () {
-          setState(() {
-            dateIndex = index;
-            isPressedDate = !isPressedDate;
-          });
-        },
-        child: PriceItem(
-          itemName: itemPrices[index].item,
-          itemPrice: itemPrices[index].price,
-          isSelected: dateIndex == index,
+    return SizedBox(
+      height: 69.h,
+      child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.only(left: 20.h, top: 16.h),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () {
+            setState(() {
+              dateIndex = index;
+              isPressedDate = !isPressedDate;
+            });
+          },
+          child: PriceItem(
+            itemName: itemPrices[index].item,
+            itemPrice: itemPrices[index].price,
+            isSelected: dateIndex == index,
+          ),
         ),
+        separatorBuilder: (context, index) => SizedBox(
+          width: 16.h,
+        ),
+        itemCount: itemPrices.length,
       ),
-      separatorBuilder: (context, index) => SizedBox(
-        width: 16.h,
-      ),
-      itemCount: itemPrices.length,
-    ),
-  );
-}
+    );
+  }
 
   Widget totalPrice() {
     return Padding(
@@ -405,7 +411,11 @@ class PriceItem extends StatelessWidget {
   final String itemPrice;
   final bool isSelected;
 
-  const PriceItem({Key? key, required this.itemName, required this.itemPrice, required this.isSelected})
+  const PriceItem(
+      {Key? key,
+      required this.itemName,
+      required this.itemPrice,
+      required this.isSelected})
       : super(key: key);
 
   @override
@@ -427,4 +437,3 @@ class PriceItem extends StatelessWidget {
     );
   }
 }
-

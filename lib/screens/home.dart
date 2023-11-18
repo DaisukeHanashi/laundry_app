@@ -177,7 +177,7 @@ class _HomeState extends State<Home> {
             return GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailScreen(
-                 serviceDetail: ServiceDetail( name: 'Berry Clean ', rating: '4.5'),
+                 serviceDetail: ServiceDetail( name: 'Berry Clean ', rating: '4.5', image:'assets/berryclean.jpg'),
                  selectedImage: servicesDetails[index].image,
                 ),
                 ),
