@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:laundry_app/screens/order_detail.dart';
 import '../utils/app_button.dart';
 import '../utils/app_color.dart';
 import '../utils/app_image.dart';
@@ -8,6 +9,7 @@ import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../utils/favorite_manager.dart';
+import '../widget/my_address.dart';
 import '../widget/work_categories.dart';
 import '../utils/work_categories_model.dart';
 import 'more_info.dart';
@@ -40,10 +42,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   int dateIndex = 0;
 
   List<ItemPrice> itemPrices = [
-    ItemPrice(item: 'T-Shirt', price: '10.00'),
-    ItemPrice(item: 'Suit', price: '20.00'),
-    ItemPrice(item: 'Dress', price: '15.00'),
-    ItemPrice(item: 'Bedding', price: '25.00'),
+    ItemPrice(item: '1-5kg', price: '₱100.00'),
+    ItemPrice(item: '6-10kg', price: '₱150.00'),
+    ItemPrice(item: '11-15kg', price: '₱200.00'),
+    ItemPrice(item: '16-20kg', price: '₱250.00'),
   ];
 
   @override
@@ -71,15 +73,11 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                 ),
                 services(),
                 AppSpace(
-                  height: 24.h,
+                  height: 20.h,
                 ),
                 priceList(),
                 AppSpace(
                   height: 34.h,
-                ),
-                totalPrice(),
-                AppSpace(
-                  height: 16.h,
                 ),
                 bookNowButton(),
               ],
@@ -335,68 +333,65 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   }
 
   Widget priceList() {
-    return SizedBox(
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 20.h),
+    child: SizedBox(
       height: 69.h,
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(left: 20.h, top: 16.h),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            setState(() {
-              dateIndex = index;
-              isPressedDate = !isPressedDate;
-            });
-          },
-          child: PriceItem(
-            itemName: itemPrices[index].item,
-            itemPrice: itemPrices[index].price,
-            isSelected: dateIndex == index,
-          ),
+      child: Container(
+        decoration: const BoxDecoration(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Price List',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Expanded( 
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.only(left: 20.h, top: 5.h),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => PriceItem(
+                  itemName: itemPrices[index].item,
+                  itemPrice: itemPrices[index].price,
+                  isSelected: dateIndex == index,
+                ),
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 16.h,
+                ),
+                itemCount: itemPrices.length,
+              ),
+            ),
+          ],
         ),
-        separatorBuilder: (context, index) => SizedBox(
-          width: 16.h,
-        ),
-        itemCount: itemPrices.length,
       ),
-    );
-  }
-
-  Widget totalPrice() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomText(
-            text: AppText.totalPrice,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            textAlign: TextAlign.start,
-            textColor: AppColor.subColor,
-          ),
-          CustomText(
-            text: AppText.price,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w700,
-            textAlign: TextAlign.end,
-            textColor: AppColor.appFont,
-          ),
-        ],
-      ),
-    );
-  }
+    ),
+  );
+}
 
   Widget bookNowButton() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: const AppButton(
-        buttonText: AppText.bookNow,
-      ),
-    );
-  }
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OrderDetail(userProfile: MyAddress(
+                  onAddressSelected: (selectedAddress) {
+                  },
+                ),
+        ),
+        ),
+      );
+    },
+    child: const AppButton(
+      buttonText: AppText.bookNow,
+    ),
+  );
+}
 }
 
 class ItemPrice {
@@ -411,27 +406,27 @@ class PriceItem extends StatelessWidget {
   final String itemPrice;
   final bool isSelected;
 
-  const PriceItem(
-      {Key? key,
-      required this.itemName,
-      required this.itemPrice,
-      required this.isSelected})
-      : super(key: key);
+  const PriceItem({
+    Key? key,
+    required this.itemName,
+    required this.itemPrice,
+    required this.isSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 8.h),
       decoration: BoxDecoration(
-        color: isSelected ? AppColor.subColor : const Color(0xFF9EB384),
+        color: const Color(0xFF9EB384),
         borderRadius: BorderRadius.circular(12.h),
       ),
       child: Text(
-        '$itemName: \$$itemPrice',
-        style: TextStyle(
-          color: isSelected ? Colors.white : AppColor.appFont,
-          fontSize: 16.sp,
-          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
+        '$itemName: $itemPrice', 
+        style: const TextStyle(
+          color:  Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );

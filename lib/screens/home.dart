@@ -13,9 +13,8 @@ import '../utils/custom_text.dart';
 import '../widget/search_container.dart';
 import '../widget/work_categories.dart';
 import '../utils/work_categories_model.dart';
+import 'notifications.dart';
 import 'service_detail_screen.dart';
-
-
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,28 +24,34 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  int i=0;
-  int service=0;
+  int i = 0;
+  int service = 0;
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     return Scaffold(
       backgroundColor: AppColor.appColor,
       body: SafeArea(
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-           AppSpace( height: 35.h,
-           ),
+            AppSpace(
+              height: 35.h,
+            ),
             appBar(),
-            SizedBox(height: 10.h,),
+            SizedBox(
+              height: 10.h,
+            ),
             const SearchContainer(),
             slider(),
-            SizedBox(height: 10.h,),
+            SizedBox(
+              height: 10.h,
+            ),
             dotIndicator(),
-            AppSpace(height: 16.h,
+            AppSpace(
+              height: 16.h,
             ),
             categoriesText(),
             serviceCategories(),
@@ -57,8 +62,10 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget  appBar (){ return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 25.h),
+
+  Widget appBar() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25.h),
       child: Column(
         children: [
           Row(
@@ -71,11 +78,24 @@ class _HomeState extends State<Home> {
                 text: 'Welcome,',
               ),
               const Spacer(),
-              Image.asset(AppImages.bell,height: 30.h,),
+              GestureDetector(onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Notifications(),
+                    ));
+                 },
+                  child: Image.asset(
+                    AppImages.bell,
+                    height: 30.h,
+                  )),
               SizedBox(
                 width: 16.h,
               ),
-              Image.asset(AppImages.settings,height: 30.h,),
+              Image.asset(
+                AppImages.settings,
+                height: 30.h,
+              ),
             ],
           ),
           Row(
@@ -91,25 +111,28 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-    ); 
-    }
-  Widget dotIndicator (){
+    );
+  }
+
+  Widget dotIndicator() {
     return DotsIndicator(
       dotsCount: 5,
       position: i,
       decorator: DotsDecorator(
-        size:  Size.square(8.0.h),
-        activeSize:  Size(8.0, 8.0.h),
+        size: Size.square(8.0.h),
+        activeSize: Size(8.0, 8.0.h),
         color: const Color(0xFFEAEAEA),
         spacing: EdgeInsets.symmetric(horizontal: 4.h),
-        activeColor:  AppColor.appBannerColor,
-        activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0.r)),
+        activeColor: AppColor.appBannerColor,
+        activeShape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0.r)),
       ),
     );
   }
-  Widget  categoriesText (){
+
+  Widget categoriesText() {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -124,25 +147,27 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget serviceCategories (){
+
+  Widget serviceCategories() {
     return SizedBox(
       height: 117.h,
       child: ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal:20.h,vertical: 16.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.h),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => Categories(
-            image: categoriesModel[index].image,
-            type: categoriesModel[index].name,
-          ),
+                image: categoriesModel[index].image,
+                type: categoriesModel[index].name,
+              ),
           separatorBuilder: (context, index) => SizedBox(
-            width: 24.h,
-          ),
+                width: 24.h,
+              ),
           itemCount: categoriesModel.length),
     );
   }
-  Widget nearestLaundryText (){
+
+  Widget nearestLaundryText() {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -164,23 +189,30 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget servicesInfoList (){
+
+  Widget servicesInfoList() {
     return SizedBox(
       height: 454.h,
       child: ListView.separated(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: 20.h,vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.h),
           separatorBuilder: (context, index) => AppSpace(
-            height: 16.h,
-          ),
+                height: 16.h,
+              ),
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailScreen(
-                 serviceDetail: ServiceDetail( name: 'Berry Clean ', rating: '4.5', image:'assets/berryclean.jpg'),
-                 selectedImage: servicesDetails[index].image,
-                ),
-                ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ServiceDetailScreen(
+                      serviceDetail: ServiceDetail(
+                          name: 'Berry Clean ',
+                          rating: '4.5',
+                          image: 'assets/berryclean.jpg'),
+                      selectedImage: servicesDetails[index].image,
+                    ),
+                  ),
                 );
               },
               child: PopularShops(
@@ -195,17 +227,16 @@ class _HomeState extends State<Home> {
           itemCount: servicesDetails.length),
     );
   }
-  Widget slider (){
+
+  Widget slider() {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.h),
       child: CarouselSlider.builder(
-
         options: CarouselOptions(
-
           height: 160.0.h,
           enlargeCenterPage: true,
           autoPlay: true,
-          aspectRatio: 16/8,
+          aspectRatio: 16 / 8,
           autoPlayCurve: Curves.fastOutSlowIn,
           enableInfiniteScroll: true,
           autoPlayAnimationDuration: const Duration(milliseconds: 800),
@@ -215,11 +246,11 @@ class _HomeState extends State<Home> {
               i = index;
             });
           },
-
-        ), itemCount: 5, itemBuilder: (BuildContext context, int index, int realIndex) {
-
-        return const AppBanner();
-      },
+        ),
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index, int realIndex) {
+          return const AppBanner();
+        },
       ),
     );
   }

@@ -22,18 +22,26 @@ class DetailedProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          buildProfileItem('Name', 'John Doe'),
-          buildProfileItem('Email', 'john.doe@example.com'),
-          buildProfileItem('Phone number', '09354275932'),
+          buildProfileItem(Icons.person, 'Name', 'John Doe'),
+          const Divider(),
+          buildProfileItem(Icons.email, 'Email', 'john.doe@example.com'),
+          const Divider(),
+          buildProfileItem(Icons.phone, 'Phone number', '09354275932'),
         ],
       ),
     );
   }
 
-  Widget buildProfileItem(String label, String value) {
-    return ListTile(
-      title: Text(label),
-      subtitle: Text(value),
+  Widget buildProfileItem(IconData icon, String label, String value) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(icon),
+          title: Text(label),
+          subtitle: Text(value),
+        ),
+        const Divider(),
+      ],
     );
   }
 }

@@ -46,41 +46,42 @@ class Favorites extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                shop.name, 
-                style: const TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () {
-                   FavoritesManager.removeFromFavorites(shop);
-                },
-              ),
-            ],
-          ),
-          AppSpace(
-            height: 12.h,
-          ),
-          Row(
             children: [
               Image.asset(
-                shop.image,
+                shop.image, 
                 width: 50.0,
                 height: 50.0,
               ),
-              const Spacer(),
-              Image.asset(
-                AppImages.star,
-                width: 24.h,
-                height: 24.h,
+              const SizedBox(width: 8.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    shop.name,
+                    style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  AppSpace(height: 8.h),
+                  Row(
+                    children: [
+                      Image.asset(
+                        AppImages.star,
+                        width: 24.h,
+                        height: 24.h,
+                      ),
+                      Text(
+                        shop.rating, 
+                        style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Text(
-                shop.rating,
-                style: const TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.normal),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  FavoritesManager.removeFromFavorites(shop);
+                },
               ),
             ],
           ),
