@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:laundry_app/screens/verify_mobile.dart';
+
+import '../screens/verify.dart';
 
 class DetailedProfileScreen extends StatelessWidget {
-  const DetailedProfileScreen({super.key});
+  const DetailedProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +27,23 @@ class DetailedProfileScreen extends StatelessWidget {
           ),
           buildProfileItem(Icons.person, 'Name', 'John Doe'),
           const Divider(),
-          buildProfileItem(Icons.email, 'Email', 'john.doe@example.com'),
+          buildVerifiedProfileItem(
+            Icons.email,
+            'Email',
+            'john.doe@example.com',
+            () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Verify()));
+            },
+          ),
           const Divider(),
-          buildProfileItem(Icons.phone, 'Phone number', '09354275932'),
+          buildVerifiedProfileItem(
+            Icons.phone,
+            'Phone number',
+            '09354275932',
+            () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const VerifyMobile()));
+            },
+          ),
         ],
       ),
     );
@@ -44,4 +61,37 @@ class DetailedProfileScreen extends StatelessWidget {
       ],
     );
   }
+
+  Widget buildVerifiedProfileItem(IconData icon, String label, String value, VoidCallback onTap) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(icon),
+          title: Text(label),
+          subtitle: Row(
+            children: [
+              Text(value),
+              const Spacer(),
+              GestureDetector(
+                onTap: onTap,
+                child: const Text(
+                  'Verify',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Divider(),
+      ],
+    );
+  }
 }
+
+
+
+
+

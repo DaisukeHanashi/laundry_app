@@ -36,14 +36,14 @@ class _MyAddressState extends State<MyAddress> {
                   SizedBox(width: 8), 
                   Expanded(
                     child: Text(
-                      'N. Escario St. Banawa, Cebu City',
+                      'Juana Osmena Extn. Camputhaw, Cebu City',
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ],
               ),
               trailing: Radio<String>(
-                value: 'N. Escario St. Banawa, Cebu City',
+                value: 'Juana Osmena Extn. Camputhaw, Cebu City',
                 groupValue: selectedAddress,
                 onChanged: (String? value) {
                   setState(() {

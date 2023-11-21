@@ -57,7 +57,6 @@ class Profile extends StatelessWidget {
                 null,
                 MyAddress(
                   onAddressSelected: (selectedAddress) {
-                    // Do something with the selected address
                   },
                 ),
               ),
@@ -216,7 +215,7 @@ class Profile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const Login(),
+            builder: (context) => const Login(email: '', password: '',),
           ),
         );
       },

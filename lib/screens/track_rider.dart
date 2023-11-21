@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:laundry_app/screens/home.dart';
+import 'package:laundry_app/widget/bottom_bar.dart';
 
 import 'chat.dart';
 
@@ -28,7 +28,7 @@ class TrackRider extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => const Home())); 
+            MaterialPageRoute(builder: (context) => const BottomBar())); 
           },
         ),
       ),

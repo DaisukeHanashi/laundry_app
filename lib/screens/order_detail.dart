@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:laundry_app/screens/invoice.dart';
 import '../widget/my_address.dart';
 import '../utils/app_color.dart';
 import '../utils/app_string.dart';
@@ -354,10 +355,7 @@ double calculateTotalPrice() {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentMethodScreen(
-                        totalAmount: calculateTotalPrice(),
-                        userProfile: widget.userProfile,
-                      ),
+                      builder: (context) => Invoice(userProfile: widget.userProfile)
                     ),
                   );
                 },

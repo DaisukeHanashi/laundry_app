@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:laundry_app/screens/login.dart';
 import '../../custom/half_circle_custom.dart';
 import '../utils/app_button.dart';
 import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
+import 'choose.dart';
 
 class ThirdSplashScreen extends StatefulWidget {
   const ThirdSplashScreen({Key? key}) : super(key: key);
@@ -90,7 +90,7 @@ class _ThirdSplashScreenState extends State<ThirdSplashScreen> {
   Widget getStartedButton(){
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const Login(),));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const Choose(),));
       },
       child: const AppButton(
         buttonText: 'Get Started',

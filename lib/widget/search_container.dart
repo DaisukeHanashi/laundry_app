@@ -13,7 +13,7 @@ class _SearchContainerState extends State<SearchContainer> {
 
   bool isSearchedClicked = false;
   String searchText = '';
-  List<String> items = ['Laundry shop', 'Plumbing shop', 'Farm shop'];
+  List<String> items = ['Quick Stop Laundry', 'SoftWash Laundromat', 'Chill Laundry Lounge'];
 
   late List<String> filteredItems;
 
@@ -107,11 +107,19 @@ class _SearchContainerState extends State<SearchContainer> {
                   itemBuilder: (context, index) => ListTile(
                     title: Text(filteredItems[index]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ShopDetails()),
-                      );
+                          List<ShopDetail> shopDetailsList = [
+                          ShopDetail(name: 'Quick Stop Laundry', rating: '4.5', image: 'assets/quickstop.jpg'),
+                        ];
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ShopDetails(
+                              shopDetails: shopDetailsList[index], 
+                              selectedImage: shopDetailsList[index].image,
+                            ),
+                          ),
+                        );
                       setState(() {
                         _searchController.text = filteredItems[index];
                         isSearchedClicked = false;
