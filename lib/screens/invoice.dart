@@ -68,7 +68,7 @@ class Invoice extends StatefulWidget {
             ),
             const SizedBox(height: 20),
             const Text(
-              'Product Name: Your Product Name',
+              'Order: 5kg of clothes',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
