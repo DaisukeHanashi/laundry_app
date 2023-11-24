@@ -8,7 +8,6 @@ import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../widget/pickup_model.dart';
 import '../widget/pickup_time.dart';
-import 'payment_method_screen.dart';
 
 
 class ItemPrice {
@@ -351,27 +350,30 @@ double calculateTotalPrice() {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Invoice(userProfile: widget.userProfile)
-                    ),
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Center(
-                    child: Text(
-                      'Review payment and address',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Invoice(
+                          userProfile: widget.userProfile,
+                          totalAmount: calculateTotalPrice(), 
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Text(
+                        'Review payment and address',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
             ),
           ],
         ),

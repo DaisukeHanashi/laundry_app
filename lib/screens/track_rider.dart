@@ -24,11 +24,11 @@ class TrackRider extends StatelessWidget {
         title: const Text('Rider Tracking', style: TextStyle(fontSize: 24)),
         centerTitle: true,
         backgroundColor: const Color(0xFF0E5C46),
-         leading: IconButton(
+        leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => const BottomBar())); 
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const BottomBar()));
           },
         ),
       ),
@@ -36,18 +36,19 @@ class TrackRider extends StatelessWidget {
         children: [
           FlutterMap(
             options: MapOptions(
-              center: LatLng(10.318034485432943, 123.89662564907515),
+              center: LatLng(10.322012828264846, 123.8948697371247),
               zoom: 14.0,
             ),
             layers: [
               TileLayerOptions(
-                urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                urlTemplate:
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 subdomains: ['a', 'b', 'c'],
               ),
               MarkerLayerOptions(
                 markers: [
                   Marker(
-                    point: LatLng(37.7749, -122.4194), 
+                    point: LatLng(37.7749, -122.4194),
                     builder: (context) => const Icon(
                       Icons.location_pin,
                       color: Colors.red,
@@ -86,8 +87,8 @@ class TrackRider extends StatelessWidget {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF0E5C46), 
-                      ),
+                      backgroundColor: const Color(0xFF0E5C46),
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,

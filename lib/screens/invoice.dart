@@ -4,14 +4,16 @@ import 'payment_method_screen.dart';
 
 class Invoice extends StatefulWidget {
   final MyAddress userProfile;
+  final double totalAmount; 
 
-  const Invoice({Key? key, required this.userProfile}) : super(key: key);
+  const Invoice({Key? key, required this.userProfile, required this.totalAmount}) : super(key: key);
 
   @override
   _InvoiceState createState() => _InvoiceState();
 }
 
- class _InvoiceState extends State<Invoice> {
+
+class _InvoiceState extends State<Invoice> {
   int tShirts = 0;
   int dresses = 0;
   int pants = 0;
@@ -67,9 +69,9 @@ class Invoice extends StatefulWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Order: 5kg of clothes',
-              style: TextStyle(fontSize: 16),
+            Text(
+              'Order: ${getSelectedOrderDetails()}',
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -77,9 +79,9 @@ class Invoice extends StatefulWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Price: ₱100',
-              style: TextStyle(fontSize: 16),
+            Text(
+              'Price: ₱${calculateTotalPrice().toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -93,7 +95,7 @@ class Invoice extends StatefulWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Total: ₱${calculateTotalPrice().toStringAsFixed(2)}',
+              'Total: ₱${widget.totalAmount}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -111,7 +113,7 @@ class Invoice extends StatefulWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => PaymentMethodScreen(
-                      totalAmount: calculateTotalPrice(),
+                      totalAmount: widget.totalAmount,
                       userProfile: widget.userProfile,
                     ),
                   ),
@@ -127,8 +129,19 @@ class Invoice extends StatefulWidget {
       ),
     );
   }
-}
 
+  String getSelectedOrderDetails() {
+    double totalWeight = calculateTotalWeight();
+    ItemPrice applicablePrice = itemPrices.firstWhere(
+      (price) =>
+          totalWeight <=
+          double.parse(price.item.split('-')[1].replaceAll('kg', '')),
+      orElse: () => itemPrices.last,
+    );
+
+    return '${applicablePrice.item} of clothes';
+  }
+}
 
 class ItemPrice {
   final String item;

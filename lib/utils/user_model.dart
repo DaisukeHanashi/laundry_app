@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:laundry_app/utils/work_categories_model.dart';
 
 part 'user_model.g.dart';
 
