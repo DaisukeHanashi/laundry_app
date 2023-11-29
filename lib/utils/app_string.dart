@@ -1,11 +1,11 @@
 class AppText {
   static const String bannerText = 'Discount on Every Friday';
-  static const String appMotive1 = 'Bringing Freshness to Your Fabrics';
-  static const String appDescription1 ='Savor the Cleanliness, Bring Back the Shine, and Give Your Clothes the Best Care.';
-  static const String appMotive2 = 'Renew Your Wardrobe with Our Expert Care';
-  static const String appDescription2 = 'A Symphony of Cleanliness: Raising the Standard of Laundering.';
-  static const String appMotive3 = 'We Care for Your Clothes';
-  static const String appDescription3 ='Discover Where Every Garment is Treated Like Royalty.';
+  static const String appMotive1 = 'Discover Nearest Laundry';
+  static const String appDescription1 ='Want to wash your clothes? No worries. Discover laundry shops nearest to your area.';
+  static const String appMotive2 = 'Choose Pickup/Delivery';
+  static const String appDescription2 = 'Pick the date and time, schedule your delivery for clothes';
+  static const String appMotive3 = 'Track Your Order';
+  static const String appDescription3 ='Track the status of your laundry order.';
   static const String bookNow = 'Book Now';
   static const String shop = 'Berry Clean';
   static const String shop1 = 'Rinse';

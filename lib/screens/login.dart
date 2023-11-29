@@ -8,7 +8,8 @@ class Login extends StatelessWidget {
   final String email;
   final String password;
 
-  const Login({Key? key, required this.email, required this.password}) : super(key: key);
+  const Login({Key? key, required this.email, required this.password})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class Login extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFFFFFFFF), Color(0xFF52FFC1), Color(0xFF25D3F9)],
-              stops: [0.3, 0.7, 0.9],
+              colors: [Color(0xFFFFFFFF), Color.fromARGB(255, 46, 143, 107)],
+              stops: [0.35, 0.9],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -27,13 +28,13 @@ class Login extends StatelessWidget {
             scrollDirection: Axis.vertical,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 140.0),
+                padding: const EdgeInsets.only(top: 130.0),
                 child: Column(
                   children: [
                     const Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'LaundryMate',
+                        'Login',
                         style: TextStyle(
                           fontFamily: 'Garet-Book',
                           fontSize: 30,
@@ -41,7 +42,16 @@ class Login extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 150),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Hello, welcome back!',
+                      style: TextStyle(
+                        fontFamily: 'Garet-Book',
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 80),
                     Container(
                       height: 450,
                       width: 325,
@@ -56,7 +66,7 @@ class Login extends StatelessWidget {
                           children: [
                             const SizedBox(height: 30),
                             const Text(
-                              'Email/Username',
+                              'Email',
                               style: TextStyle(
                                 fontFamily: 'Garet-Book',
                                 fontSize: 15,
@@ -89,7 +99,8 @@ class Login extends StatelessWidget {
                               child: PasswordField(),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 20, 20, 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -113,7 +124,8 @@ class Login extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const BottomBar()),
+                                  MaterialPageRoute(
+                                      builder: (context) => const BottomBar()),
                                 );
                               },
                               child: Container(
@@ -141,7 +153,7 @@ class Login extends StatelessWidget {
                             const SizedBox(height: 20),
                             const Center(
                               child: Text(
-                                '-------------- or sign up using -----------',
+                                'or sign up using',
                                 style: TextStyle(
                                   fontFamily: 'Garet-Book',
                                   fontSize: 15,
@@ -153,9 +165,11 @@ class Login extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                buildSocialButton('Google', 'assets/google_logo.png'),
+                                buildSocialButton(
+                                    'Google', 'assets/google_logo.png'),
                                 const SizedBox(width: 10),
-                                buildSocialButton('Facebook', 'assets/facebook_logo.png'),
+                                buildSocialButton(
+                                    'Facebook', 'assets/facebook_logo.png'),
                               ],
                             ),
                             const SizedBox(height: 20),
@@ -167,7 +181,8 @@ class Login extends StatelessWidget {
                                     color: Colors.grey,
                                   ),
                                   children: <TextSpan>[
-                                    const TextSpan(text: "Don't have an account? "),
+                                    const TextSpan(
+                                        text: "Don't have an account? "),
                                     TextSpan(
                                       text: 'Sign Up',
                                       style: const TextStyle(
@@ -180,7 +195,9 @@ class Login extends StatelessWidget {
                                         ..onTap = () {
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => const SignUp()),
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const SignUp()),
                                           );
                                         },
                                     ),

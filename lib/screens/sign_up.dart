@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-
 import '../utils/user_model.dart';
 import 'login.dart';
-import 'verify_account.dart';
+import 'verify.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -23,31 +22,54 @@ class _SignUpState extends State<SignUp> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFFFFFFFF), Color(0xFF52FFC1), Color(0xFF25D3F9)],
-              stops: [0.3, 0.7, 0.9],
+              colors: [Color(0xFFFFFFFF), Color.fromARGB(255, 46, 143, 107)],
+              stops: [0.35, 0.9],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
           ),
           child: ListView(
             children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40.0, left: 10.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_back_ios_new_outlined,
+                          color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
               Padding(
-                padding: const EdgeInsets.only(top: 140.0),
+                padding: const EdgeInsets.only(top: 70.0),
                 child: Column(
                   children: [
                     const Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'LaundryMate',
+                        'Sign Up',
                         style: TextStyle(
                           fontSize: 30,
                           color: Color(0xFF52CBBE),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 130),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Just a few quick things to get started.',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 90),
                     Container(
-                      height: 475,
+                      height: 470,
                       width: 325,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -161,7 +183,9 @@ class _SignUpState extends State<SignUp> {
                                 );
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const VerifyAccount()),
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Verify()),
                                 );
                               },
                               child: Container(
@@ -194,7 +218,8 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 children: const <TextSpan>[
                                   TextSpan(
-                                    text: 'By selecting Sign up, you agree to our ',
+                                    text:
+                                        'By selecting Sign up, you agree to our ',
                                   ),
                                   TextSpan(
                                     text: 'Terms',
