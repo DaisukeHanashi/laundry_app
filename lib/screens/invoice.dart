@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/screens/confirm.dart';
 import '../widget/my_address.dart';
-import 'payment_method_screen.dart';
 
 class Invoice extends StatefulWidget {
   final double totalAmount;

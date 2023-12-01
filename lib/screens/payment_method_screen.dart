@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:laundry_app/screens/invoice.dart';
 import 'package:laundry_app/widget/my_address.dart';
 
@@ -8,7 +7,8 @@ import 'credit.dart';
 class PaymentMethodScreen extends StatefulWidget {
   final double totalAmount;
 
-  const PaymentMethodScreen({Key? key, required this.totalAmount}) : super(key: key);
+  const PaymentMethodScreen({Key? key, required this.totalAmount})
+      : super(key: key);
 
   @override
   _PaymentMethodScreenState createState() => _PaymentMethodScreenState();
@@ -106,21 +106,21 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               },
             ),
             RadioListTile<String>(
-                title: const Text('Cash-in Credit'),
-                value: 'Cash-in credit',
-                groupValue: selectedPaymentMethod,
-                onChanged: (value) {
-                  setState(() {
-                    selectedPaymentMethod = value;
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CashInCreditPaymentScreen(),
-                    ),
-                  );
-                },
-              ),
+              title: const Text('Cash-in Credit'),
+              value: 'Cash-in credit',
+              groupValue: selectedPaymentMethod,
+              onChanged: (value) {
+                setState(() {
+                  selectedPaymentMethod = value;
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CashInCreditPaymentScreen(),
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 16),
             if (selectedPaymentMethod == 'Credit Card') ...[
               const Text(
@@ -173,11 +173,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0E5C46),
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0), 
-              ),
+                backgroundColor: const Color(0xFF0E5C46),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
                 ),
+              ),
               child: const Text('Select Address'),
             ),
             const SizedBox(height: 16),
@@ -211,12 +211,13 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF0E5C46),
                   shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0), 
-              ),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
                 ),
-                child: const Text('Pay Now',style: TextStyle(
-                  fontSize: 18
-                ),),
+                child: const Text(
+                  'Pay Now',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
           ],
@@ -225,8 +226,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     );
   }
 }
+
 class UserProfileProvider extends ChangeNotifier {
-  MyAddress userProfile =  MyAddress(onAddressSelected: (String ) { },); 
+  MyAddress userProfile = MyAddress(
+    onAddressSelected: (String) {},
+  );
 
   void updateUserProfile(MyAddress newProfile) {
     userProfile = newProfile;

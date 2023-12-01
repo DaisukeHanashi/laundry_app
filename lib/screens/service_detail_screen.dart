@@ -12,7 +12,6 @@ import '../utils/favorite_manager.dart';
 import '../widget/my_address.dart';
 import '../widget/work_categories.dart';
 import '../utils/work_categories_model.dart';
-import 'chat.dart';
 import 'more_info.dart';
 import 'see_reviews.dart';
 
