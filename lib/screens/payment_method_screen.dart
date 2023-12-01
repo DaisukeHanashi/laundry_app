@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:laundry_app/screens/track_rider.dart';
+import 'package:provider/provider.dart';
+import 'package:laundry_app/screens/invoice.dart';
 import 'package:laundry_app/widget/my_address.dart';
+
+import 'credit.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
   final double totalAmount;
 
-  const PaymentMethodScreen({Key? key, required this.totalAmount, required MyAddress userProfile}) : super(key: key);
+  const PaymentMethodScreen({Key? key, required this.totalAmount}) : super(key: key);
 
   @override
   _PaymentMethodScreenState createState() => _PaymentMethodScreenState();
@@ -18,6 +21,39 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   TextEditingController cvvController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+
+  void _placeOrder(BuildContext context) {
+    if (selectedPaymentMethod == 'Cash') {
+      _placeOrderWithCash(context);
+    } else if (selectedPaymentMethod == 'Credit Card') {
+      _placeOrderWithCreditCard(context);
+    } else if (selectedPaymentMethod == 'GCash') {
+      _placeOrderWithGCash(context);
+    }
+  }
+
+  void _placeOrderWithCash(BuildContext context) {
+    _showOrderConfirmation(context);
+  }
+
+  void _placeOrderWithCreditCard(BuildContext context) {
+    _showOrderConfirmation(context);
+  }
+
+  void _placeOrderWithGCash(BuildContext context) {
+    _showOrderConfirmation(context);
+  }
+
+  void _showOrderConfirmation(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Invoice(
+          totalAmount: widget.totalAmount,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +105,22 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 });
               },
             ),
+            RadioListTile<String>(
+                title: const Text('Cash-in Credit'),
+                value: 'Cash-in credit',
+                groupValue: selectedPaymentMethod,
+                onChanged: (value) {
+                  setState(() {
+                    selectedPaymentMethod = value;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CashInCreditPaymentScreen(),
+                    ),
+                  );
+                },
+              ),
             const SizedBox(height: 16),
             if (selectedPaymentMethod == 'Credit Card') ...[
               const Text(
@@ -105,7 +157,6 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               ),
             ],
             const SizedBox(height: 16),
-            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -121,6 +172,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0E5C46),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0), 
+              ),
+                ),
               child: const Text('Select Address'),
             ),
             const SizedBox(height: 16),
@@ -150,27 +207,29 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TrackRider(
-                        riderName: 'Juan Carlos',
-                        phoneNumber: '09215468942',
-                        image: 'assets/driver.jpg',
-                      ),
-                    ),
-                  );
-                },
+                onPressed: () => _placeOrder(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF0E5C46),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0), 
+              ),
                 ),
-                child: const Text('Place Order'),
+                child: const Text('Pay Now',style: TextStyle(
+                  fontSize: 18
+                ),),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+}
+class UserProfileProvider extends ChangeNotifier {
+  MyAddress userProfile =  MyAddress(onAddressSelected: (String ) { },); 
+
+  void updateUserProfile(MyAddress newProfile) {
+    userProfile = newProfile;
+    notifyListeners();
   }
 }

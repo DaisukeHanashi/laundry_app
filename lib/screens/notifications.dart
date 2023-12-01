@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'rate.dart';
+import 'payment_method_screen.dart'; 
 
 class Notifications extends StatelessWidget {
   const Notifications({Key? key});
@@ -25,7 +25,7 @@ class Notifications extends StatelessWidget {
           const Divider(),
           buildRateNotification('Don\'t forget to rate your recent service.', '1 week ago', context),
           const Divider(),
-          buildNotification('New feature: Schedule your laundry for future dates!', '2 weeks ago'),
+          buildPaymentNotification('Your order has been delivered. Payment is pending.', 'Just now', context, 145.0), // Replace 145.0 with the actual total amount
         ],
       ),
     );
@@ -54,6 +54,20 @@ class Notifications extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Rate()),
+        );
+      },
+      child: buildNotification(message, time),
+    );
+  }
+
+  Widget buildPaymentNotification(String message, String time, BuildContext context, double totalAmount) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaymentMethodScreen(totalAmount: totalAmount),
+          ),
         );
       },
       child: buildNotification(message, time),

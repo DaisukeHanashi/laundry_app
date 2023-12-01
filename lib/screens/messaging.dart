@@ -28,7 +28,7 @@ class _MessagingState extends State<Messaging> {
               backgroundImage: AssetImage(storeNames[index].image!),
             ),
             title: Text(storeNames[index].name!),
-            subtitle: Text('Message body of ${storeNames[index].name}'),
+            subtitle: const Text('Have a nice day,'),
             onTap: () {
               Navigator.push(
                 context,

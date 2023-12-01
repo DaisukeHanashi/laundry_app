@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:laundry_app/screens/confirm.dart';
 import '../widget/my_address.dart';
 import 'payment_method_screen.dart';
 
 class Invoice extends StatefulWidget {
-  final MyAddress userProfile;
-  final double totalAmount; 
+  final double totalAmount;
 
-  const Invoice({Key? key, required this.userProfile, required this.totalAmount}) : super(key: key);
+  const Invoice({Key? key, required this.totalAmount}) : super(key: key);
 
   @override
   _InvoiceState createState() => _InvoiceState();
 }
+
 
 
 class _InvoiceState extends State<Invoice> {
@@ -52,7 +53,6 @@ class _InvoiceState extends State<Invoice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Invoice', style: TextStyle(fontSize: 24)),
         centerTitle: true,
         backgroundColor: const Color(0xFF0E5C46),
       ),
@@ -106,23 +106,28 @@ class _InvoiceState extends State<Invoice> {
               'Payment Method: Visa Card',
               style: TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 350),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PaymentMethodScreen(
+                    builder: (context) => PaymentConfirmationScreen(
                       totalAmount: widget.totalAmount,
-                      userProfile: widget.userProfile,
                     ),
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0E5C46),
+              backgroundColor: const Color(0xFF0E5C46),
+              minimumSize: const Size(400, 40),
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0), 
               ),
-              child: const Text('Pay Now'),
+            ),
+              child: const Text('Confirm Payment',style: TextStyle(
+                fontSize: 18
+              ),),
             ),
           ],
         ),
@@ -151,4 +156,12 @@ class ItemPrice {
     required this.item,
     required this.price,
   });
+}
+class UserProfileProvider extends ChangeNotifier {
+  MyAddress userProfile = MyAddress(onAddressSelected: (String ) {  },); 
+
+  void updateUserProfile(MyAddress newProfile) {
+    userProfile = newProfile;
+    notifyListeners();
+  }
 }

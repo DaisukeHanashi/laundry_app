@@ -28,5 +28,6 @@ class  AppImages {
   static const String bDiscover = "${assetsPath}bDiscovery.png";
   static const String bProfile = "${assetsPath}bProfile.png";
   static const String settings = "${assetsPath}settings.png";
+   static const String ewallet = "${assetsPath}ewallet.png";
 
 }

@@ -148,12 +148,12 @@ class _SplashScreenState extends State<SplashScreen> {
                     },
                     children: const [
                       SplashPage(
-                        imagePath: 'assets/ironing.jpg',
+                        imagePath: 'assets/ironing.png',
                         motive: AppText.appMotive1,
                         description: AppText.appDescription1,
                       ),
                       SplashPage(
-                        imagePath: 'assets/delivery.jpg',
+                        imagePath: 'assets/delivery.png',
                         motive: AppText.appMotive2,
                         description: AppText.appDescription2,
                       ),

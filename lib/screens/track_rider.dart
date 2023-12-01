@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:laundry_app/widget/bottom_bar.dart';
-
 import 'chat.dart';
 
 class TrackRider extends StatelessWidget {
@@ -88,6 +87,9 @@ class TrackRider extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0E5C46),
+                      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0), 
+              ),
                     ),
                     onPressed: () {
                       Navigator.push(

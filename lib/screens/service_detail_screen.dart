@@ -12,14 +12,17 @@ import '../utils/favorite_manager.dart';
 import '../widget/my_address.dart';
 import '../widget/work_categories.dart';
 import '../utils/work_categories_model.dart';
+import 'chat.dart';
 import 'more_info.dart';
 import 'see_reviews.dart';
 
 class ServiceDetailScreen extends StatefulWidget {
   final ServiceDetail serviceDetail;
   final String? selectedImage;
+
   const ServiceDetailScreen(
-      {super.key, required this.serviceDetail, this.selectedImage});
+      {Key? key, required this.serviceDetail, this.selectedImage})
+      : super(key: key);
 
   @override
   State<ServiceDetailScreen> createState() => _ServiceDetailScreenState();
@@ -30,23 +33,14 @@ class ServiceDetail {
   final String rating;
   final String image;
 
-  ServiceDetail({required this.name, required this.rating, required this.image});
+  ServiceDetail(
+      {required this.name, required this.rating, required this.image});
 }
 
 List<ServiceDetail> favoriteServices = [];
 
 class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   bool isPressed = false;
-  int dayIndex = 0;
-  bool isPressedDate = false;
-  int dateIndex = 0;
-
-  List<ItemPrice> itemPrices = [
-    ItemPrice(item: '1-5kg', price: '₱100.00'),
-    ItemPrice(item: '6-10kg', price: '₱150.00'),
-    ItemPrice(item: '11-15kg', price: '₱200.00'),
-    ItemPrice(item: '16-20kg', price: '₱250.00'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -65,21 +59,17 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
               children: [
                 serviceNameAndLocation(),
                 AppSpace(
-                  height: 24.h,
+                  height: 30.h,
                 ),
                 aboutShop(),
                 AppSpace(
-                  height: 24.h,
+                  height: 30.h,
                 ),
                 services(),
                 AppSpace(
-                  height: 20.h,
+                  height: 100.h,
                 ),
-                priceList(),
-                AppSpace(
-                  height: 34.h,
-                ),
-                bookNowButton(),
+                 bookNowButton(),
               ],
             ),
           ),
@@ -332,102 +322,22 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
     );
   }
 
-  Widget priceList() {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20.h),
-    child: SizedBox(
-      height: 69.h,
-      child: Container(
-        decoration: const BoxDecoration(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Price List',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Expanded( 
-              child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.only(left: 20.h, top: 5.h),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => PriceItem(
-                  itemName: itemPrices[index].item,
-                  itemPrice: itemPrices[index].price,
-                  isSelected: dateIndex == index,
-                ),
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 16.h,
-                ),
-                itemCount: itemPrices.length,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
   Widget bookNowButton() {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OrderDetail(userProfile: MyAddress(
-                  onAddressSelected: (selectedAddress) {
-                  },
-                ),
-        ),
-        ),
-      );
-    },
-    child: const AppButton(
-      buttonText: AppText.bookNow,
-    ),
-  );
-}
-}
-
-class ItemPrice {
-  final String item;
-  final String price;
-
-  ItemPrice({required this.item, required this.price});
-}
-
-class PriceItem extends StatelessWidget {
-  final String itemName;
-  final String itemPrice;
-  final bool isSelected;
-
-  const PriceItem({
-    Key? key,
-    required this.itemName,
-    required this.itemPrice,
-    required this.isSelected,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: const Color(0xFF9EB384),
-        borderRadius: BorderRadius.circular(12.h),
-      ),
-      child: Text(
-        '$itemName: $itemPrice', 
-        style: const TextStyle(
-          color:  Colors.black,
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-        ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OrderDetail(
+              userProfile: MyAddress(
+                onAddressSelected: (selectedAddress) {},
+              ),
+            ),
+          ),
+        );
+      },
+      child: const AppButton(
+        buttonText: AppText.bookNow,
       ),
     );
   }

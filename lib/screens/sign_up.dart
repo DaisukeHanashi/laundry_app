@@ -63,7 +63,7 @@ class _SignUpState extends State<SignUp> {
                     const Text(
                       'Just a few quick things to get started.',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         color: Colors.black,
                       ),
                     ),
@@ -129,21 +129,6 @@ class _SignUpState extends State<SignUp> {
                             ),
                             const SizedBox(height: 15),
                             const Text(
-                              'Phone Number',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            const SizedBox(height: 5),
-                            const SizedBox(
-                              width: 280,
-                              height: 40,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
                               'Password',
                               style: TextStyle(color: Colors.black),
                             ),
@@ -164,7 +149,35 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        // Toggle the visibility of the password
+                                        isPasswordVisible = !isPasswordVisible;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            const Text(
+                              'Confirm Password',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              width: 280,
+                              height: 40,
+                              child: TextField(
+                                controller: passwordController,
+                                obscureText: !isPasswordVisible,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
                                         isPasswordVisible = !isPasswordVisible;
                                       });
                                     },

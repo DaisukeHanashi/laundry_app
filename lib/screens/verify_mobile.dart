@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:laundry_app/widget/bottom_bar.dart';
+import 'enable.dart';
 
 
 class VerifyMobile extends StatelessWidget {
@@ -22,11 +22,11 @@ class VerifyMobile extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFFFFFFF), Color(0xFF52FFC1), Color(0xFF25D3F9)],
-            stops: [0.3, 0.7, 0.9],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+              colors: [Color(0xFFFFFFFF), Color.fromARGB(255, 46, 143, 107)],
+              stops: [0.35, 0.9],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
         ),
         child: ListView(
         children: [
@@ -174,7 +174,7 @@ class VerifyMobile extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const BottomBar()),
+                                MaterialPageRoute(builder: (context) => const TwoFactorAuthenticationSetup()),
                               );
                             },
                             child: Container(

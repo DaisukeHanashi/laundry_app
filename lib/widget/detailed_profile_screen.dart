@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:laundry_app/screens/verify_mobile.dart';
+import 'package:laundry_app/screens/edit_profile_screen.dart';
 
-import '../screens/verify.dart';
 
 class DetailedProfileScreen extends StatelessWidget {
   const DetailedProfileScreen({Key? key}) : super(key: key);
@@ -12,6 +11,22 @@ class DetailedProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My Profile'),
         backgroundColor: const Color(0xFF0E5C46),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+             onPressed: () {
+              UserProfile userProfile = UserProfile(
+                name: 'John Doe',
+                email: 'john.doe@gmail.com',
+                phoneNumber: '09354275932',
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditProfileScreen(userProfile: userProfile)),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,23 +42,11 @@ class DetailedProfileScreen extends StatelessWidget {
           ),
           buildProfileItem(Icons.person, 'Name', 'John Doe'),
           const Divider(),
-          buildVerifiedProfileItem(
-            Icons.email,
-            'Email',
-            'john.doe@example.com',
-            () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Verify()));
-            },
-          ),
+          buildProfileItem(Icons.email, 'Email',
+              'john.doe@gmail.com'), 
           const Divider(),
-          buildVerifiedProfileItem(
-            Icons.phone,
-            'Phone number',
-            '09354275932',
-            () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const VerifyMobile()));
-            },
-          ),
+          buildProfileItem(Icons.phone, 'Phone number',
+              '09354275932'), 
         ],
       ),
     );
@@ -61,37 +64,4 @@ class DetailedProfileScreen extends StatelessWidget {
       ],
     );
   }
-
-  Widget buildVerifiedProfileItem(IconData icon, String label, String value, VoidCallback onTap) {
-    return Column(
-      children: [
-        ListTile(
-          leading: Icon(icon),
-          title: Text(label),
-          subtitle: Row(
-            children: [
-              Text(value),
-              const Spacer(),
-              GestureDetector(
-                onTap: onTap,
-                child: const Text(
-                  'Verify',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Divider(),
-      ],
-    );
-  }
 }
-
-
-
-
-

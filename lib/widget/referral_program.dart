@@ -44,7 +44,10 @@ class ReferralProgram extends StatelessWidget {
               onPressed: () {
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0E5C46)
+                backgroundColor: const Color(0xFF0E5C46),
+                shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0), 
+              ),
               ),
               child: const Text('Share your code',style: TextStyle(
                 fontSize: 18,

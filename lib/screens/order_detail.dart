@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:laundry_app/screens/invoice.dart';
 import '../widget/my_address.dart';
 import '../utils/app_color.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../widget/pickup_model.dart';
 import '../widget/pickup_time.dart';
-
-
-class ItemPrice {
-  final String item;
-  final double price;
-
-  ItemPrice({required this.item, required this.price});
-}
+import 'track_status.dart';
 
 class OrderDetail extends StatefulWidget {
   final MyAddress userProfile;
@@ -26,26 +18,17 @@ class OrderDetail extends StatefulWidget {
   _OrderDetailState createState() => _OrderDetailState();
 }
 
-
-
 class _OrderDetailState extends State<OrderDetail> {
-  int tShirts = 0;
-  int dresses = 0;
-  int pants = 0;
-  int shorts = 0;
   bool hasPreferable = false;
   bool isPressedDate = false;
   int dateIndex = 0;
   String preferences = '';
   List<String> selectedPreferences = [];
   DateTime selectedDate = DateTime.now();
-
-  List<ItemPrice> itemPrices = [
-    ItemPrice(item: '1-5kg', price: 100.00),
-    ItemPrice(item: '6-10kg', price: 150.00),
-    ItemPrice(item: '11-15kg', price: 200.00),
-    ItemPrice(item: '16-20kg', price: 250.00),
-  ];
+  bool isScheduled = false;
+  bool isRescheduled = false;
+  String orderType = ''; // Walk-in or Pick-up
+  TextEditingController laundryItemController = TextEditingController();
 
   void _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -62,29 +45,6 @@ class _OrderDetailState extends State<OrderDetail> {
     }
   }
 
-double calculateTotalWeight() {
-  return (tShirts + dresses + pants + shorts).toDouble();
-}
-
-double calculateTotalPrice() {
-  double totalWeight = calculateTotalWeight();
-  double deliveryFee = 45.00;
-
-  if (itemPrices.isNotEmpty) {
-    ItemPrice applicablePrice = itemPrices.firstWhere(
-      (price) =>
-          totalWeight <=
-          double.parse(price.item.split('-')[1].replaceAll('kg', '')),
-      orElse: () => itemPrices.last,
-    );
-
-    return totalWeight * applicablePrice.price + deliveryFee;
-  } else {
-    return 0.0;
-  }
-}
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,16 +58,18 @@ double calculateTotalPrice() {
         child: ListView(
           scrollDirection: Axis.vertical,
           children: [
+            // Order Type (Walk-in or Pick-up)
             Container(
               decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12)),
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Select Items:',
+                    'Order Type:',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.black,
@@ -116,58 +78,26 @@ double calculateTotalPrice() {
                   ),
                   Row(
                     children: [
-                      const Text('1-5kg:'),
-                      const Spacer(),
-                      Checkbox(
-                        value: tShirts > 0,
-                        onChanged: (bool? value) {
+                      Radio(
+                        value: 'walk-in',
+                        groupValue: orderType,
+                        onChanged: (value) {
                           setState(() {
-                            tShirts = value! ? 1 : 0;
+                            orderType = value.toString();
                           });
                         },
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text('6-10kg:'),
-                      const Spacer(),
-                      Checkbox(
-                        value: dresses > 0,
-                        onChanged: (bool? value) {
+                      const Text('Walk-in'),
+                      Radio(
+                        value: 'pick-up',
+                        groupValue: orderType,
+                        onChanged: (value) {
                           setState(() {
-                            dresses = value! ? 1 : 0;
+                            orderType = value.toString();
                           });
                         },
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text('11-15kg:'),
-                      const Spacer(),
-                      Checkbox(
-                        value: pants > 0,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            pants = value! ? 1 : 0;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text('16-20kg:'),
-                      const Spacer(),
-                      Checkbox(
-                        value: shorts > 0,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            shorts = value! ? 1 : 0;
-                          });
-                        },
-                      ),
+                      const Text('Pick-up'),
                     ],
                   ),
                 ],
@@ -176,14 +106,82 @@ double calculateTotalPrice() {
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12)),
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Schedule Pickup:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  Row(
+                    children: [
+                      Text(
+                          'Selected Date: ${DateFormat.yMd().format(selectedDate.toLocal())}'),
+                      IconButton(
+                        icon: const Icon(Icons.calendar_today),
+                        onPressed: () => _selectDate(context),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  pickUpTimeText(),
+                  selectTime(),
+                  if (isScheduled && !isRescheduled)
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isRescheduled = !isRescheduled;
+                        });
+                      },
+                      child: const Text('Reschedule'),
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Laundry Item Specification
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Laundry Item Specification:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  TextField(
+                    controller: laundryItemController,
+                    decoration: const InputDecoration(
+                      labelText: 'Specify laundry',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Laundry Preferences:',
+                    'Detergents:',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.black,
@@ -233,16 +231,7 @@ double calculateTotalPrice() {
                 ],
               ),
             ),
-            const SizedBox(height: 16.0),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12)),
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Additional Preferences:',
+                const Text('Additional Preferences:',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
@@ -258,91 +247,6 @@ double calculateTotalPrice() {
                       labelText: 'Enter your preferences',
                     ),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Schedule Pickup:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Row(
-                    children: [
-                      Text(
-                          'Selected Date: ${DateFormat.yMd().format(selectedDate.toLocal())}'),
-                      IconButton(
-                        icon: const Icon(Icons.calendar_today),
-                        onPressed: () => _selectDate(context),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  pickUpTimeText(),
-                  selectTime()
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: const Row(
-                children: [
-                  Text(
-                    'Delivery Fee',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    '₱45.00',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Amount: ₱${calculateTotalPrice().toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -350,30 +254,27 @@ double calculateTotalPrice() {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Invoice(
-                          userProfile: widget.userProfile,
-                          totalAmount: calculateTotalPrice(), 
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Center(
-                      child: Text(
-                        'Review payment and address',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderTracking(),
+                    ),
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text(
+                      'Book',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
+              ),
             ),
           ],
         ),
@@ -419,7 +320,9 @@ double calculateTotalPrice() {
             });
           },
           child: PickUpTime(
-              time: pickupTime[index], isPressed: dateIndex == index),
+            time: pickupTime[index],
+            isPressed: dateIndex == index,
+          ),
         ),
         separatorBuilder: (context, index) => SizedBox(
           width: 16.h,
@@ -427,5 +330,9 @@ double calculateTotalPrice() {
         itemCount: pickupTime.length,
       ),
     );
+  }
+
+  double calculateTotalPrice() {
+    return 0.0;
   }
 }

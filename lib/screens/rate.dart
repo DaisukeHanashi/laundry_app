@@ -146,6 +146,9 @@ class _RateState extends State<Rate> {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF0E5C46),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0), 
+              ),
         ),
         child: const Text('Submit'),
       ),

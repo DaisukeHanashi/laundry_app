@@ -13,7 +13,7 @@ class AppButton extends StatelessWidget {
       padding:  EdgeInsets.symmetric(horizontal: 16.h),
       child: Container(
         height: 48.h,
-        width: 400.h,
+        width: 300.h,
         decoration: BoxDecoration(
           color: AppColor.appBannerColor,
           borderRadius: BorderRadius.circular(16.r),

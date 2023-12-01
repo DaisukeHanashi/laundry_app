@@ -15,7 +15,7 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat with Driver', style: TextStyle(fontSize: 24)),
+        title: const Text('Chat', style: TextStyle(fontSize: 24)),
         centerTitle: true,
         backgroundColor: const Color(0xFF0E5C46),
       ),
