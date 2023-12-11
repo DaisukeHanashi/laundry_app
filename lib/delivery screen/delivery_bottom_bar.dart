@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../screens/ewallet.dart';
-import '../screens/favorites.dart';
-import '../screens/messaging.dart';
+import 'package:laundry_app/delivery%20screen/delivery_home.dart';
+import 'package:laundry_app/screens/chat.dart';
 import '../screens/profile.dart';
 import '../utils/app_color.dart';
 import '../utils/app_image.dart';
-import '../screens/home.dart';
 
-class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
+
+class DeliveryBottomBar extends StatefulWidget {
+  const DeliveryBottomBar({Key? key}) : super(key: key);
 
   @override
-  State<BottomBar> createState() => _BottomBarState();
+  State<DeliveryBottomBar> createState() => _DeliveryBottomBarState();
 }
 
-class _BottomBarState extends State<BottomBar> {
+class _DeliveryBottomBarState extends State<DeliveryBottomBar> {
   List<Widget> screenList = [
-    const Home(),
-    const Ewallet(),
-    const Messaging(),
-    const Favorites(),
+    const DeliveryHome(),
+    const Chat(),
     const Profile(),
   ];
 
@@ -66,15 +63,7 @@ class _BottomBarState extends State<BottomBar> {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.ewallet)),
-          label: '',
-        ),
-        BottomNavigationBarItem(
           icon: ImageIcon(AssetImage(AppImages.bChat)),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.bookMark)),
           label: '',
         ),
         BottomNavigationBarItem(

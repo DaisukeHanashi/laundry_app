@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:laundry_app/screens/login.dart';
+import 'package:laundry_app/screens/account.dart';
 import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
@@ -99,9 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Login(
-                              email: 'john.doe@gmail.com', password: 'john0425',
-                            ),
+                            builder: (context) => const AccountScreen()
                           ),
                         );
                       },
@@ -120,9 +118,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Login(
-                              email: 'john.doe@gmail.com', password: 'john0425',
-                            ),
+                            builder: (context) => const AccountScreen()
                           ),
                         );
                       },

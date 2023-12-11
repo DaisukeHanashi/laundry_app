@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laundry_app/widget/bottom_bar.dart';
+import 'package:laundry_app/screens/home.dart';
  
 
 class Success extends StatelessWidget {
@@ -9,7 +9,6 @@ class Success extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Success'),
         backgroundColor: const Color(0xFF0E5C46),
       ),
       body: Center(
@@ -33,7 +32,7 @@ class Success extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const BottomBar()),
+                    MaterialPageRoute(builder: (context) => const Home()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

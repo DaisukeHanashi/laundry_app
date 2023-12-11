@@ -14,13 +14,15 @@ class UserProfile {
     required this.email,
     required this.phoneNumber,
     this.profileImage,
+    required String password,
   });
 }
 
 class EditProfileScreen extends StatefulWidget {
   final UserProfile userProfile;
 
-  const EditProfileScreen({Key? key, required this.userProfile}) : super(key: key);
+  const EditProfileScreen({Key? key, required this.userProfile})
+      : super(key: key);
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -36,7 +38,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
     _nameController = TextEditingController(text: widget.userProfile.name);
     _emailController = TextEditingController(text: widget.userProfile.email);
-    _phoneController = TextEditingController(text: widget.userProfile.phoneNumber);
+    _phoneController =
+        TextEditingController(text: widget.userProfile.phoneNumber);
   }
 
   @override
@@ -102,4 +105,3 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     widget.userProfile.phoneNumber = _phoneController.text;
   }
 }
-

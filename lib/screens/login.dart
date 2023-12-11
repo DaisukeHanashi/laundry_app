@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/widget/bottom_bar.dart';
-
+import 'package:laundry_app/screens/home.dart';
 import 'sign_up.dart';
 
 class Login extends StatelessWidget {
@@ -125,7 +124,7 @@ class Login extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const BottomBar()),
+                                      builder: (context) => const Home()),
                                 );
                               },
                               child: Container(
@@ -252,7 +251,7 @@ class PasswordField extends StatefulWidget {
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
 
   @override

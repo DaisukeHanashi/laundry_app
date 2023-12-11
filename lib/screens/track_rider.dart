@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:laundry_app/widget/bottom_bar.dart';
+import 'package:laundry_app/screens/home.dart'; 
 import 'chat.dart';
 
 class TrackRider extends StatelessWidget {
@@ -27,7 +27,7 @@ class TrackRider extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const BottomBar()));
+                MaterialPageRoute(builder: (context) => const Home()));
           },
         ),
       ),
@@ -88,8 +88,8 @@ class TrackRider extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0E5C46),
                       shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0), 
-              ),
+                      borderRadius: BorderRadius.circular(15.0), 
+                      ),
                     ),
                     onPressed: () {
                       Navigator.push(

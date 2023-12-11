@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:laundry_app/delivery%20screen/verify_account.dart';
 import 'package:laundry_app/screens/account.dart';
+import '../screens/login.dart';
 import '../utils/user_model.dart';
-import 'login.dart';
-import 'verify.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class DeliverySignup extends StatefulWidget {
+  const DeliverySignup({Key? key}) : super(key: key);
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _DeliverySignupState createState() => _DeliverySignupState();
 }
 
-class _SignUpState extends State<SignUp> {
-  TextEditingController passwordController = TextEditingController();
+class _DeliverySignupState extends State<DeliverySignup> {
+   TextEditingController passwordController = TextEditingController();
   bool isPasswordVisible = false;
 
   @override
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     const SizedBox(height: 90),
                     Container(
-                      height: 470,
+                      height: 440,
                       width: 325,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -133,36 +133,22 @@ class _SignUpState extends State<SignUp> {
                             ),
                             const SizedBox(height: 15),
                             const Text(
-                              'Password',
+                              'Phone Number',
                               style: TextStyle(color: Colors.black),
                             ),
                             const SizedBox(height: 5),
-                            SizedBox(
+                            const SizedBox(
                               width: 280,
                               height: 40,
                               child: TextField(
-                                controller: passwordController,
-                                obscureText: !isPasswordVisible,
                                 decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      isPasswordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        isPasswordVisible = !isPasswordVisible;
-                                      });
-                                    },
-                                  ),
+                                  border: OutlineInputBorder(),
                                 ),
                               ),
                             ),
                             const SizedBox(height: 15),
                             const Text(
-                              'Confirm Password',
+                              'Password',
                               style: TextStyle(color: Colors.black),
                             ),
                             const SizedBox(height: 5),
@@ -202,7 +188,7 @@ class _SignUpState extends State<SignUp> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const Verify()),
+                                          const VerifyAccount()),
                                 );
                               },
                               child: Container(
@@ -226,40 +212,6 @@ class _SignUpState extends State<SignUp> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 15),
-                            RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey.shade400,
-                                ),
-                                children: const <TextSpan>[
-                                  TextSpan(
-                                    text:
-                                        'By selecting Sign up, you agree to our ',
-                                  ),
-                                  TextSpan(
-                                    text: 'Terms',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' and have Read and acknowledge our ',
-                                  ),
-                                  TextSpan(
-                                    text: 'Privacy Policy',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.red,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),

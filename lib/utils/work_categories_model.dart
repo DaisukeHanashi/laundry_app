@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'app_image.dart';
 import 'app_string.dart';
-
 
 class WorkCategories {
   String? image;
@@ -15,21 +15,52 @@ class WorkCategories {
 List<WorkCategories> categoriesModel = [
   WorkCategories(
     image: AppImages.washiron,
-    name: AppText.item1,
+    name: AppText.service1,
   ),
   WorkCategories(
     image: AppImages.washfold,
-    name: AppText.item2,
+    name: AppText.service2,
   ),WorkCategories(
     image: AppImages.dryclean,
-    name: AppText.item3,
+    name: AppText.service3,
   ),WorkCategories(
     image: AppImages.laundry,
+    name: AppText.service4,
+  ),
+];
+class OrdersStatus {
+  IconData icon; 
+  String? name;
+
+  OrdersStatus({
+    required this.icon,
+    this.name,
+  });
+}
+
+List<OrdersStatus> ordersModel = [
+  OrdersStatus(
+    icon: Icons.wallet,
+    name: AppText.item1,
+  ),
+  OrdersStatus(
+    icon: Icons.shopping_basket_outlined,
+    name: AppText.item5,
+  ),
+  OrdersStatus(
+    icon: Icons.description_outlined,
+    name: AppText.item2,
+  ),
+  OrdersStatus(
+    icon: Icons.delivery_dining_outlined,
+    name: AppText.item3,
+  ),
+  OrdersStatus(
+    icon: Icons.stars_outlined,
     name: AppText.item4,
   ),
-  
-
 ];
+
 
 class ServicesDetails {
   String? image;
@@ -145,3 +176,4 @@ class Message {
     required this.text,
   });
 }
+

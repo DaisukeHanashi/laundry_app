@@ -21,8 +21,6 @@ class ShopDetails extends StatefulWidget {
   final String? selectedImage;
 
   const ShopDetails({super.key, required this.shopDetails, this.selectedImage});
-  
-
 
   @override
   State<ShopDetails> createState() => _ShopDetailsState();
@@ -43,13 +41,6 @@ class _ShopDetailsState extends State<ShopDetails> {
   int dayIndex = 0;
   bool isPressedDate = false;
   int dateIndex = 0;
-
-  List<ItemPrice> itemPrices = [
-    ItemPrice(item: '1-5kg', price: '₱100.00'),
-    ItemPrice(item: '6-10kg', price: '₱150.00'),
-    ItemPrice(item: '11-15kg', price: '₱200.00'),
-    ItemPrice(item: '16-20kg', price: '₱250.00'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +67,7 @@ class _ShopDetailsState extends State<ShopDetails> {
                 ),
                 services(),
                 AppSpace(
-                  height: 20.h,
-                ),
-                priceList(),
-                AppSpace(
-                  height: 34.h,
+                  height: 95.h,
                 ),
                 bookNowButton(),
               ],
@@ -94,8 +81,7 @@ class _ShopDetailsState extends State<ShopDetails> {
   Widget servicesImage(String? selectedImage) {
     return Stack(
       children: [
-        Image.asset(selectedImage ?? AppImages.detailsBack,
-        width: 500),
+        Image.asset(selectedImage ?? AppImages.detailsBack, width: 500),
         Container(
           height: 300.h,
           decoration: const BoxDecoration(
@@ -131,7 +117,8 @@ class _ShopDetailsState extends State<ShopDetails> {
                     setState(() {
                       isPressed = !isPressed;
                       if (isPressed) {
-                        FavoritesManager.addToFavorites(widget.shopDetails as ServiceDetail);
+                        FavoritesManager.addToFavorites(
+                            widget.shopDetails as ServiceDetail);
                       } else {
                         FavoritesManager.removeFromFavorites(
                             widget.shopDetails as ServiceDetail);
@@ -161,7 +148,7 @@ class _ShopDetailsState extends State<ShopDetails> {
           Row(
             children: [
               CustomText(
-                text: AppText.bestFind,
+                text: AppText.shop4,
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w700,
                 textColor: AppColor.appFont,
@@ -335,66 +322,25 @@ class _ShopDetailsState extends State<ShopDetails> {
     );
   }
 
-  Widget priceList() {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20.h),
-    child: SizedBox(
-      height: 69.h,
-      child: Container(
-        decoration: const BoxDecoration(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Price List',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Expanded( 
-              child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.only(left: 20.h, top: 5.h),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => PriceItem(
-                  itemName: itemPrices[index].item,
-                  itemPrice: itemPrices[index].price,
-                  isSelected: dateIndex == index,
-                ),
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 16.h,
-                ),
-                itemCount: itemPrices.length,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
   Widget bookNowButton() {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OrderDetail(userProfile: MyAddress(
-                  onAddressSelected: (selectedAddress) {
-                  },
-                ),
-        ),
-        ),
-      );
-    },
-    child: const AppButton(
-      buttonText: AppText.bookNow,
-    ),
-  );
-}
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OrderDetail(
+              userProfile: MyAddress(
+                onAddressSelected: (selectedAddress) {},
+              ),
+            ),
+          ),
+        );
+      },
+      child: const AppButton(
+        buttonText: AppText.bookNow,
+      ),
+    );
+  }
 }
 
 class ItemPrice {
@@ -425,9 +371,9 @@ class PriceItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.h),
       ),
       child: Text(
-        '$itemName: $itemPrice', 
+        '$itemName: $itemPrice',
         style: const TextStyle(
-          color:  Colors.black,
+          color: Colors.black,
           fontSize: 16,
           fontWeight: FontWeight.w700,
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../widget/bottom_bar.dart';
+import 'package:laundry_app/screens/home.dart';
 
 class CashInCreditPaymentScreen extends StatefulWidget {
   const CashInCreditPaymentScreen({super.key});
@@ -87,7 +86,7 @@ class _CashInCreditPaymentScreenState extends State<CashInCreditPaymentScreen> {
           TextButton(
             onPressed: () {
               Navigator.push(context,MaterialPageRoute(
-                    builder: (context) => const BottomBar()));
+                    builder: (context) => const Home()));
             },
             child: const Text('OK'),
           ),

@@ -6,7 +6,6 @@ import 'package:laundry_app/widget/loyalty_program.dart';
 import 'package:laundry_app/widget/my_address.dart';
 import 'package:laundry_app/widget/referral_program.dart';
 import 'package:laundry_app/widget/subscription.dart';
-
 import '../widget/cards_screen.dart';
 import '../widget/detailed_profile_screen.dart';
 

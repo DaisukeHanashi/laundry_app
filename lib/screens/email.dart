@@ -47,8 +47,8 @@ class _EmailToggleScreenState extends State<EmailToggleScreen> {
                   minimumSize: const Size(300, 40), 
                   backgroundColor: const Color(0xFF0E5C46),
                   shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0), 
-              ),
+                  borderRadius: BorderRadius.circular(15.0), 
+                  ),
                 ),
               child: const Text('Verify'),
             ),

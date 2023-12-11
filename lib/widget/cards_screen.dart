@@ -7,18 +7,16 @@ class CardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Cards'),
+        title: const Text('Payment Methods'),
         backgroundColor: const Color(0xFF0E5C46),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildCardItem(
-            cardImage: 'assets/visa_logo.jpg',
-            cardName: 'Visa',
-            cardNumber: '**** **** **** 0965',
-            expirationDate: '12/23',
-            availableBalance: '₱11,000.00',
+            cardImage: 'assets/GCash.jpg',
+            cardName: 'Gcash Payment',
+            cardNumber: '63-9****75932',
           ),
         ],
       ),
@@ -29,8 +27,6 @@ class CardsScreen extends StatelessWidget {
     required String cardImage,
     required String cardName,
     required String cardNumber,
-    required String expirationDate,
-    required String availableBalance,
   }) {
     return ListTile(
       title: Row(
@@ -54,14 +50,6 @@ class CardsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 40),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(availableBalance),
-              ],
-            ),
-          ),
         ],
       ),
       subtitle: Row(
@@ -79,17 +67,6 @@ class CardsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 40),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  expirationDate,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );
