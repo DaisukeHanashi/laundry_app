@@ -32,7 +32,8 @@ class Success extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const Home()),
+                    MaterialPageRoute(builder: (context) => const Home(
+                      userName: '', userEmail: '', userPhoneNumber: '',)),
                   );
                 },
                 style: ElevatedButton.styleFrom(

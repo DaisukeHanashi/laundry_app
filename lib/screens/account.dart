@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:laundry_app/screens/sign_up.dart';
-
 import '../delivery screen/delivery_signup.dart';
+import 'login.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int currentIndex = 0;
   Map<int, Map<String, String>> pageData = {
     0: {
@@ -79,7 +78,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                    builder: (context) => const SignUp()),
+                    builder: (context) => const Login(email: '', password: '',)),
                     );
                 }
               },

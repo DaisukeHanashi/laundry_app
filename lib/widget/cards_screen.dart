@@ -18,6 +18,12 @@ class CardsScreen extends StatelessWidget {
             cardName: 'Gcash Payment',
             cardNumber: '63-9****75932',
           ),
+          const SizedBox(height: 16),
+          buildCardItem(
+            cardImage: 'assets/paymaya.png',
+            cardName: 'PayMaya Payment',
+            cardNumber: '4***-****-****-1234',
+          ),
         ],
       ),
     );
@@ -33,8 +39,8 @@ class CardsScreen extends StatelessWidget {
         children: [
           Image.asset(
             cardImage,
-            width: 70,
-            height: 70,
+            width: 50,
+            height: 50,
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -44,17 +50,20 @@ class CardsScreen extends StatelessWidget {
                 Text(
                   cardName,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w500),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 40),
+          const Icon(Icons.arrow_forward_ios), // Trailing arrow forward icon
+          const SizedBox(width: 8),
         ],
       ),
       subtitle: Row(
         children: [
-          const SizedBox(width: 80),
+          const SizedBox(width: 60),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:laundry_app/screens/home.dart';
 import 'package:laundry_app/screens/login.dart';
 import 'package:laundry_app/widget/history_orders.dart';
 import 'package:laundry_app/widget/loyalty_program.dart';
@@ -7,10 +9,38 @@ import 'package:laundry_app/widget/my_address.dart';
 import 'package:laundry_app/widget/referral_program.dart';
 import 'package:laundry_app/widget/subscription.dart';
 import '../widget/cards_screen.dart';
-import '../widget/detailed_profile_screen.dart';
+import '../utils/user_model.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key});
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  late String userName;
+  late String userEmail;
+  late String userPhoneNumber;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
+  Future<void> loadUserData() async {
+    final userBox = await Hive.openBox<UserModel>('users');
+    if (userBox.isNotEmpty) {
+      final user = userBox.getAt(0)!;
+      setState(() {
+        userName = user.name;
+        userEmail = user.email;
+        userPhoneNumber = user.phoneNumber;
+      });
+    }
+    await userBox.close();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +85,7 @@ class Profile extends StatelessWidget {
                 Icons.location_on_outlined,
                 null,
                 MyAddress(
-                  onAddressSelected: (selectedAddress) {
-                  },
+                  onAddressSelected: (selectedAddress) {},
                 ),
               ),
               const SizedBox(height: 10.0),
@@ -66,7 +95,7 @@ class Profile extends StatelessWidget {
                 'January 1, 2023',
                 Icons.list_alt_outlined,
                 null,
-                 HistoryOrders(),
+                HistoryOrders(),
               ),
               const SizedBox(height: 10.0),
               _buildSection(
@@ -120,7 +149,8 @@ class Profile extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const DetailedProfileScreen(),
+                builder: (context) => const Home(
+                  userName: '', userEmail: '', userPhoneNumber: '',),
               ),
             );
           },
@@ -214,7 +244,7 @@ class Profile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const Login(email: '', password: '',),
+            builder: (context) => const Login(email: '', password: ''),
           ),
         );
       },

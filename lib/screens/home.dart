@@ -3,6 +3,9 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:laundry_app/screens/order_status.dart';
+import 'package:laundry_app/screens/payment_screen.dart';
+import 'package:laundry_app/screens/pickup_orders.dart';
 import 'package:laundry_app/widget/history_orders.dart';
 import 'package:laundry_app/widget/orders.dart';
 import '../utils/app_banner.dart';
@@ -15,11 +18,22 @@ import '../utils/work_categories_model.dart';
 import '../widget/popular_shops.dart';
 import '../widget/search_container.dart';
 import 'build_drawer.dart';
+import 'delivery_order.dart';
 import 'notifications.dart';
 import 'service_detail_screen.dart';
+import 'to_rate.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final String userName;
+  final String userEmail;
+  final String userPhoneNumber;
+
+  const Home({
+    Key? key,
+    required this.userName,
+    required this.userEmail,
+    required this.userPhoneNumber,
+  }) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -45,7 +59,7 @@ class _HomeState extends State<Home> {
         statusBarIconBrightness: Brightness.light));
     return Scaffold(
       backgroundColor: AppColor.appColor,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(userDisplayName:'' , userEmail: '',),
       body: SafeArea(
         child: ListView(
           physics: const BouncingScrollPhysics(),
@@ -195,20 +209,36 @@ class _HomeState extends State<Home> {
   }
 
   Widget ordersLog() {
-    return SizedBox(
-      height: 117.h,
-      child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.h),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => Orders(
+  return SizedBox(
+    height: 117.h,
+    child: ListView.separated(
+      padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.h),
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () {
+          List<Widget> screens = [
+            PaymentScreen(),  
+            const PickupOrders(),
+            OrderProvider(),
+            const DeliveryOrder(),
+            const ToRate(),
+          ];
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => screens[index]),
+          );
+        },
+        child: Orders(
           icon: ordersModel[index].icon,
           type: ordersModel[index].name,
         ),
-        separatorBuilder: (context, index) => SizedBox(width: 20.h),
-        itemCount: ordersModel.length,
       ),
-    );
-  }
+      separatorBuilder: (context, index) => SizedBox(width: 20.h),
+      itemCount: ordersModel.length,
+    ),
+  );
+}
+
 
   Widget nearestLaundryText() {
     return Padding(
@@ -301,7 +331,7 @@ class _HomeState extends State<Home> {
   }
 
   void showLocationConfirmation() {
-  String selectedAddress = 'Escario St. Banawa Cebu'; // Default address
+  String selectedAddress = 'Escario St. Banawa Cebu'; 
 
   showModalBottomSheet(
     context: context,
@@ -317,7 +347,7 @@ class _HomeState extends State<Home> {
             const Text(
               'Can you confirm if this is your location?',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
               ),
             ),
             const SizedBox(height: 15),

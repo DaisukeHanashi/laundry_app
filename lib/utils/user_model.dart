@@ -16,5 +16,24 @@ class UserModel {
   @HiveField(3)
   final String password;
 
-  UserModel({required this.name,required this.email, required this.phoneNumber, required this.password});
+  UserModel({
+    required this.name,
+    required this.email,
+    required this.phoneNumber,
+    required this.password,
+  });
+
+  UserModel copyWith({
+    String? name,
+    String? email,
+    String? phoneNumber,
+    String? password,
+  }) {
+    return UserModel(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      password: password ?? this.password,
+    );
+  }
 }

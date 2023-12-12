@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_app/screens/home.dart';
+import '../utils/hive_crud.dart';
+import '../utils/user_model.dart';
 import 'sign_up.dart';
 
 class Login extends StatelessWidget {
@@ -120,11 +122,27 @@ class Login extends StatelessWidget {
                             ),
                             const SizedBox(height: 20),
                             GestureDetector(
-                              onTap: () {
+                              onTap: () async {
+                                final userList = await HiveCRUD.getUsers();
+
+                                final user = userList.firstWhere(
+                                  (user) => user.email == email && user.password == password,
+                                  orElse: () => UserModel(
+                                    name: 'Guest',
+                                    email: email,
+                                    phoneNumber: '',
+                                    password: password,
+                                  ),
+                                );
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Home()),
+                                    builder: (context) => Home(
+                                      userName: user.name, userEmail:user.email, userPhoneNumber:user.phoneNumber,
+                                      
+                                    ),
+                                  ),
                                 );
                               },
                               child: Container(

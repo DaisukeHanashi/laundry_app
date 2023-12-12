@@ -149,15 +149,13 @@ class _MyAddressState extends State<MyAddress> {
                   IconButton(
                     icon: const Icon(Icons.edit_outlined, color: Color(0xFF0E5C46)),
                     onPressed: () {
-                      // TODO: Implement edit logic
-                      // You can add your logic here for editing the address
+                      
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.delete_outline_outlined, color: Color(0xFF0E5C46)),
                     onPressed: () {
-                      // TODO: Implement delete logic
-                      // You can add your logic here for deleting the address
+                      
                     },
                   ),
                 ],
@@ -171,12 +169,12 @@ class _MyAddressState extends State<MyAddress> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const NewAddress(),
+              builder: (context) => const NewAddressPage(),
             ),
           );
         },
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(355, 45),
+          minimumSize: const Size(365, 45),
           backgroundColor: const Color(0xFF0E5C46),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),

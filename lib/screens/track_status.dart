@@ -120,12 +120,27 @@ class OrderStatusTile extends StatelessWidget {
     );
   }
 
-  IconData _getIconForStatus(String status) {
-    if (status == 'Order placed') {
-      return Icons.check;
+   IconData _getIconForStatus(String status) {
+    if (_isCheckedStatus(status)) {
+      return Icons.check; 
     } else {
       return Icons.access_time;
     }
   }
-}
 
+  bool _isCheckedStatus(String status) {
+    
+    return [
+      'Order placed',
+      'Preparing for pick up',
+      'Order has been picked up',
+      'Order has arrived at the Laundry shop',
+      'Clothes are being washed',
+      'Clothes are being dried',
+      'Clothes are being folded',
+      'Clothes are ready for delivery',
+      'Driver has picked up the order',
+      'Driver is on its way to you'
+    ].contains(status);
+  }
+}

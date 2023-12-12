@@ -7,7 +7,6 @@ import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../widget/pickup_model.dart';
 import '../widget/pickup_time.dart';
-import 'track_status.dart';
 
 class OrderDetail extends StatefulWidget {
   final MyAddress userProfile;
@@ -27,7 +26,7 @@ class _OrderDetailState extends State<OrderDetail> {
   DateTime selectedDate = DateTime.now();
   bool isScheduled = false;
   bool isRescheduled = false;
-  String orderType = ''; // Walk-in or Pick-up
+  String orderType = ''; 
   TextEditingController laundryItemController = TextEditingController();
 
   void _selectDate(BuildContext context) async {
@@ -58,7 +57,6 @@ class _OrderDetailState extends State<OrderDetail> {
         child: ListView(
           scrollDirection: Axis.vertical,
           children: [
-            // Order Type (Walk-in or Pick-up)
             Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
@@ -145,7 +143,6 @@ class _OrderDetailState extends State<OrderDetail> {
               ),
             ),
             const SizedBox(height: 16),
-            // Laundry Item Specification
             Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
@@ -255,12 +252,7 @@ class _OrderDetailState extends State<OrderDetail> {
               ),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrderTracking(),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(16.0),

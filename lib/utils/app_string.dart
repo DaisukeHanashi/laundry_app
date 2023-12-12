@@ -28,7 +28,8 @@ class AppText {
   static const String pcs = '/pcs';
   static const String bestFind = 'Berry Clean';
   static const String userName = 'John Doe';
-  static const String currentLocation = 'Escario St. Banawa Cebu | 1.5km';
+  static const String currentLocation = 'Escario St. Banawa Cebu';
+  static const String location = '39G N Escario St, Cebu City | 3.5km';
   static const String info = 'More Info';
   static const String ratings = '10000+ ratings';
   static const String reviews = 'See reviews';

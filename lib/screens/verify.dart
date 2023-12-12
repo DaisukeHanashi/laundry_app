@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:laundry_app/screens/sign_up.dart';
-import 'add_phone_number_screen.dart';
+import 'package:laundry_app/screens/verify_mobile.dart';
 
 class Verify extends StatelessWidget {
   const Verify({Key? key}) : super(key: key);
@@ -10,7 +10,6 @@ class Verify extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verify Email'),
         backgroundColor: const Color(0xFF0E5C46),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -178,7 +177,7 @@ class Verify extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const AddPhoneNumberScreen()),
+                                    builder: (context) => const VerifyMobile()),
                               );
                             },
                             child: Container(

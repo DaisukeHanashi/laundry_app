@@ -86,7 +86,7 @@ class _CashInCreditPaymentScreenState extends State<CashInCreditPaymentScreen> {
           TextButton(
             onPressed: () {
               Navigator.push(context,MaterialPageRoute(
-                    builder: (context) => const Home()));
+                    builder: (context) => const Home(userName: '', userEmail: '', userPhoneNumber: '',)));
             },
             child: const Text('OK'),
           ),

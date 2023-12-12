@@ -27,7 +27,8 @@ class TrackRider extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Home()));
+                MaterialPageRoute(builder: (context) => const Home(
+                  userName: '', userEmail: '', userPhoneNumber: '',)));
           },
         ),
       ),

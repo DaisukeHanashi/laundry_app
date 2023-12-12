@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:laundry_app/screens/account.dart';
+import 'package:laundry_app/screens/home.dart';
+import '../utils/hive_crud.dart';
 import '../utils/user_model.dart';
 import 'login.dart';
-import 'verify.dart';
+
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -15,6 +16,9 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController passwordController = TextEditingController();
   bool isPasswordVisible = false;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,8 @@ class _SignUpState extends State<SignUp> {
                     padding: const EdgeInsets.only(top: 40.0, left: 10.0),
                     child: GestureDetector(
                       onTap: () {
-                            Navigator.push( context, MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AccountScreen()),
-                                );
-                          },
+                        Navigator.pop(context);
+                      },
                       child: const Icon(Icons.arrow_back_ios_new_outlined,
                           color: Colors.black),
                     ),
@@ -104,11 +105,12 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             const SizedBox(height: 5),
-                            const SizedBox(
+                            SizedBox(
                               width: 280,
                               height: 40,
                               child: TextField(
-                                decoration: InputDecoration(
+                                controller: nameController,
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
                               ),
@@ -122,11 +124,31 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             const SizedBox(height: 5),
-                            const SizedBox(
+                            SizedBox(
                               width: 280,
                               height: 40,
                               child: TextField(
-                                decoration: InputDecoration(
+                                controller: emailController,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            const Text(
+                              'Phone number',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              width: 280,
+                              height: 40,
+                              child: TextField(
+                                controller: phoneController,
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                 ),
                               ),
@@ -153,36 +175,8 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        isPasswordVisible = !isPasswordVisible;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              'Confirm Password',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            const SizedBox(height: 5),
-                            SizedBox(
-                              width: 280,
-                              height: 40,
-                              child: TextField(
-                                controller: passwordController,
-                                obscureText: !isPasswordVisible,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      isPasswordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        isPasswordVisible = !isPasswordVisible;
+                                        isPasswordVisible =
+                                            !isPasswordVisible;
                                       });
                                     },
                                   ),
@@ -190,42 +184,47 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            GestureDetector(
-                              onTap: () async {
-                                await saveUserData(
-                                  name: 'John Doe',
-                                  email: 'john@example.com',
-                                  phoneNumber: '1234567890',
-                                  password: passwordController.text,
-                                );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Verify()),
-                                );
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: 280,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: const Color(0xFF0E5C46),
+                           GestureDetector(
+                            onTap: () async {
+                              await saveUserData(
+                                name: nameController.text,
+                                email: emailController.text,
+                                phoneNumber: phoneController.text,
+                                password: passwordController.text,
+                              );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Home(
+                                    userName: nameController.text,
+                                    userEmail: emailController.text,
+                                    userPhoneNumber: phoneController.text,
+                                  ),
                                 ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(12.0),
-                                  child: Text(
-                                    'Next',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                              );
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 280,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: const Color(0xFF0E5C46),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text(
+                                  'Sign up',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                             ),
+                          ),
                             const SizedBox(height: 15),
                             RichText(
                               text: TextSpan(
@@ -247,7 +246,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: ' and have Read and acknowledge our ',
+                                    text: ' and have Read and acknowledged our ',
                                   ),
                                   TextSpan(
                                     text: 'Privacy Policy',
@@ -275,29 +274,28 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future<void> saveUserData({
-    required String name,
-    required String email,
-    required String phoneNumber,
-    required String password,
-  }) async {
-    final userBox = await Hive.openBox<UserModel>('users');
-    final user = UserModel(
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      password: password,
-    );
-    userBox.add(user);
-    await userBox.close();
+  required String name,
+  required String email,
+  required String phoneNumber,
+  required String password,
+}) async {
+  final user = UserModel(
+    name: name,
+    email: email,
+    phoneNumber: phoneNumber,
+    password: password,
+  );
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Login(
-          email: email,
-          password: password,
-        ),
+  await HiveCRUD.addUser(user);
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Login(
+        email: email,
+        password: password,
       ),
-    );
-  }
+    ),
+  );
+}
 }

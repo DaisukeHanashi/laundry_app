@@ -174,7 +174,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                 width: 4.h,
               ),
               CustomText(
-                text: AppText.currentLocation,
+                text: AppText.location,
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.start,

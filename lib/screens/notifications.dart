@@ -15,7 +15,7 @@ class Notifications extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          buildNotification('Reminder: Laundry pick-up scheduled for tomorrow', '9:00 AM'),
+          buildNotification('Reminder: Laundry pick-up scheduled for tomorrow', '10:00 AM'),
           const Divider(),
           buildNotification('You have earned 50 loyalty points!', 'Yesterday'),
           const Divider(),
@@ -25,7 +25,9 @@ class Notifications extends StatelessWidget {
           const Divider(),
           buildRateNotification('Don\'t forget to rate your recent service.', '1 week ago', context),
           const Divider(),
-          buildPaymentNotification('Your order has been delivered. Payment is pending.', 'Just now', context, 145.0), // Replace 145.0 with the actual total amount
+          buildNotification('Your order has been delivered.', 'Just now'),
+          const Divider(),
+          buildPaymentNotification('Your order has been complete. Payment is pending.', '2 min', context, 145.0),
         ],
       ),
     );

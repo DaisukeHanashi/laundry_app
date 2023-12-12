@@ -10,7 +10,6 @@ class VerifyMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verify Email'),
         backgroundColor: const Color(0xFF0E5C46),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

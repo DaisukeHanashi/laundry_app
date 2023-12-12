@@ -4,6 +4,7 @@ import '../../utils/custom_text.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_image.dart';
 import '../../utils/app_string.dart';
+import '../screens/service_detail_screen.dart';
 
 class PopularShops extends StatelessWidget {
   final String?  image;
@@ -12,7 +13,14 @@ class PopularShops extends StatelessWidget {
   final String? rating;
   final String? price;
 
-  const PopularShops({super.key, this.image, this.title, this.far, this.rating, this.price});
+  final List<ServiceDetail> popularShops = [
+    ServiceDetail(name: 'Berry Clean', rating: '4.5', image: 'berry_clean_image.jpg'),
+    ServiceDetail(name: 'Another Shop', rating: '4.0', image: 'another_shop_image.jpg'),
+    // Add more shops as needed
+  ];
+
+   PopularShops({super.key, this.image, this.title, this.far, this.rating, this.price});
+
 
   @override
   Widget build(BuildContext context) {
