@@ -25,7 +25,7 @@ class DatabaseHelper {
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE users (
-            id INTEGER PRIMARY KEY AUTO_INCREMENT,
+            id BIGINT PRIMARY KEY,
             name TEXT,
             email TEXT,
             password TEXT,
@@ -35,10 +35,13 @@ class DatabaseHelper {
 
         await db.execute('''CREATE TABLE orders(
           id BIGINT PRIMARY KEY AUTO_INCREMENT, 
+          orderType VARCHAR(30), 
           status BOOLEAN, 
           custID BIGINT NOT NULL, 
           provID BIGINT, 
           price DECIMAL(5,2),
+          preferences ENUM,
+          shopImage TEXT,
           address TEXT
         )
         ''');

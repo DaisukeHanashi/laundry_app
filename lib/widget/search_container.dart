@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import '../screens/laundry_shop.dart';
 
-class SearchContainer extends StatelessWidget {
+class SearchContainer extends StatefulWidget {
+  final BigInt userID;
+
+  const SearchContainer({super.key, required this.userID}); 
+   @override
+  State<SearchContainer> createState() => _SearchContainerState();
+  
+
+}
+
+class _SearchContainerState extends State<SearchContainer>{
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,7 +20,7 @@ class SearchContainer extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LaundryShopListScreen()),
+            MaterialPageRoute(builder: (context) => LaundryShopListScreen(custID: widget.userID,)),
           );
         },
         child: Container(

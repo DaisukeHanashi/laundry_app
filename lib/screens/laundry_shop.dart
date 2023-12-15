@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../screens/shop_details.dart';
 
 class LaundryShopListScreen extends StatefulWidget {
+  final BigInt custID;
+
+  const LaundryShopListScreen({super.key, required this.custID}); 
+
   @override
   _LaundryShopListScreenState createState() => _LaundryShopListScreenState();
 }
@@ -131,6 +135,7 @@ class _LaundryShopListScreenState extends State<LaundryShopListScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ShopDetails(
+                          customerID: widget.custID,
                           shopDetails: shopDetailsList[index],
                           selectedImage: shopDetailsList[index].image,
                         ),

@@ -19,8 +19,9 @@ import 'see_reviews.dart';
 class ShopDetails extends StatefulWidget {
   final ShopDetail shopDetails;
   final String? selectedImage;
+  final BigInt customerID; 
 
-  const ShopDetails({super.key, required this.shopDetails, this.selectedImage});
+  const ShopDetails({super.key, required this.shopDetails, required this.customerID, this.selectedImage});
 
   @override
   State<ShopDetails> createState() => _ShopDetailsState();
@@ -69,7 +70,7 @@ class _ShopDetailsState extends State<ShopDetails> {
                 AppSpace(
                   height: 95.h,
                 ),
-                bookNowButton(),
+                bookNowButton(widget.shopDetails),
               ],
             ),
           ),
@@ -322,7 +323,7 @@ class _ShopDetailsState extends State<ShopDetails> {
     );
   }
 
-  Widget bookNowButton() {
+  Widget bookNowButton(ShopDetail shop) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -332,6 +333,9 @@ class _ShopDetailsState extends State<ShopDetails> {
               userProfile: MyAddress(
                 onAddressSelected: (selectedAddress) {},
               ),
+              shopPic: shop.image,
+              customerID: widget.customerID,
+              shopName: shop.name,
             ),
           ),
         );

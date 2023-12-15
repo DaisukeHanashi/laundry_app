@@ -128,6 +128,7 @@ class Login extends StatelessWidget {
                                 final user = userList.firstWhere(
                                   (user) => user.email == email && user.password == password,
                                   orElse: () => UserModel(
+                                    user_id: BigInt.from(0.9999), 
                                     name: 'Guest',
                                     email: email,
                                     phoneNumber: '',
@@ -139,7 +140,7 @@ class Login extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Home(
-                                      userName: user.name, userEmail:user.email, userPhoneNumber:user.phoneNumber,
+                                     userId: user.user_id, userName: user.name, userEmail:user.email, userPhoneNumber:user.phoneNumber,
                                       
                                     ),
                                   ),

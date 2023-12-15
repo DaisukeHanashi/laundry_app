@@ -18,9 +18,10 @@ import 'see_reviews.dart';
 class ServiceDetailScreen extends StatefulWidget {
   final ServiceDetail serviceDetail;
   final String? selectedImage;
+  final BigInt customerID; 
 
   const ServiceDetailScreen(
-      {Key? key, required this.serviceDetail, this.selectedImage})
+      {Key? key, required this.serviceDetail, required this.customerID, this.selectedImage})
       : super(key: key);
 
   @override
@@ -68,7 +69,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                 AppSpace(
                   height: 100.h,
                 ),
-                 bookNowButton(),
+                 bookNowButton(widget.serviceDetail),
               ],
             ),
           ),
@@ -321,7 +322,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
     );
   }
 
-  Widget bookNowButton() {
+  Widget bookNowButton(ServiceDetail serv) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -331,6 +332,9 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
               userProfile: MyAddress(
                 onAddressSelected: (selectedAddress) {},
               ),
+              shopPic: serv.image,
+              customerID: widget.customerID,
+              shopName: serv.name
             ),
           ),
         );

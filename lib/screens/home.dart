@@ -24,16 +24,19 @@ import 'service_detail_screen.dart';
 import 'to_rate.dart';
 
 class Home extends StatefulWidget {
+  final BigInt userId; 
   final String userName;
   final String userEmail;
   final String userPhoneNumber;
+ double defaultval = 0.9999;
 
-  const Home({
-    Key? key,
+   Home({
+    super.key,
+    required this.userId,
     required this.userName,
     required this.userEmail,
     required this.userPhoneNumber,
-  }) : super(key: key);
+  });
 
   @override
   State<Home> createState() => _HomeState();
@@ -69,7 +72,7 @@ class _HomeState extends State<Home> {
                 height: 50,
                 padding: const EdgeInsets.only(bottom: 12),
                 decoration: const BoxDecoration(color: Color(0xFF0E5C46)),
-                child: SearchContainer()),
+                child: SearchContainer(userID: widget.userId)),
             slider(),
             SizedBox(
               height: 10.h,
@@ -286,6 +289,7 @@ class _HomeState extends State<Home> {
                           rating: '4.5',
                           image: 'assets/berryclean.jpg'),
                       selectedImage: servicesDetails[index].image,
+                      customerID: widget.userId,
                     ),
                   ),
                 );

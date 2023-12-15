@@ -149,8 +149,8 @@ class _ProfileState extends State<Profile> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Home(
-                  userName: '', userEmail: '', userPhoneNumber: '',),
+                builder: (context) =>  Home(
+                  userId: BigInt.from(0.9999), userName: '',userEmail: '', userPhoneNumber: '',),
               ),
             );
           },

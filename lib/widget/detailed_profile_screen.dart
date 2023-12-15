@@ -16,7 +16,7 @@ class _DetailedProfileScreenState extends State<DetailedProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _user = generated.UserModel(name: '', email: '', phoneNumber: '', password: '');
+    _user = generated.UserModel(user_id: BigInt.from(0.9999), name: '', email: '', phoneNumber: '', password: '');
     _loadUserData();
   }
 
@@ -37,6 +37,7 @@ class _DetailedProfileScreenState extends State<DetailedProfileScreen> {
                 'bea.reyes@gmail.com'.trim().toLowerCase() &&
             user.password == 'bear123',
         orElse: () => generated.UserModel(
+          user_id: BigInt.from(0.9999),
           name: '',
           email: '',
           phoneNumber: '',

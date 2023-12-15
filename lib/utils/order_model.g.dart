@@ -13,11 +13,14 @@ class OrderModelAdapter extends TypeAdapter<OrderModel>{
     }; 
      return OrderModel(
      status: fields[0] as bool,
-     custID: fields[1] as BigInt,
-     provID: fields[2] as String,
-     price: fields[3] as double, 
-     address: fields[4] as String,
-     preference: fields[5] as String, 
+     orderType: fields[1] as String,
+     custID: fields[2] as BigInt,
+     provID: fields[3] as String,
+     price: fields[4] as double, 
+     address: fields[5] as String,
+     preference: fields[6] as List<String>, 
+     shopImage: fields[7] as String,
+     orderdate: fields[8] as DateTime,
     );
     }
 
@@ -27,15 +30,21 @@ class OrderModelAdapter extends TypeAdapter<OrderModel>{
     ..writeByte(0)
     ..write(order.status)
     ..writeByte(1)
-    ..write(order.custID)
+    ..write(order.orderType)
     ..writeByte(2)
-    ..write(order.provID)
+    ..write(order.custID)
     ..writeByte(3)
-    ..write(order.price)
+    ..write(order.provID)
     ..writeByte(4)
-    ..write(order.address)
+    ..write(order.price)
     ..writeByte(5)
-    ..write(order.preference); 
+    ..write(order.address)
+    ..writeByte(6)
+    ..write(order.preference)
+    ..writeByte(7)
+    ..write(order.shopImage)
+    ..writeByte(8)
+    ..write(order.orderdate);
 
   }
 

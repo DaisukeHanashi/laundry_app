@@ -7,11 +7,16 @@ import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../widget/pickup_model.dart';
 import '../widget/pickup_time.dart';
+import '../utils/hive_crud.dart'; 
+import '../utils/order_model.dart'; 
 
 class OrderDetail extends StatefulWidget {
   final MyAddress userProfile;
+  final String shopPic; 
+  final BigInt customerID; 
+  final String shopName; 
 
-  const OrderDetail({Key? key, required this.userProfile}) : super(key: key);
+  const OrderDetail({Key? key, required this.userProfile, required this.shopPic, required this.customerID, required this.shopName}) : super(key: key);
 
   @override
   _OrderDetailState createState() => _OrderDetailState();
@@ -251,8 +256,18 @@ class _OrderDetailState extends State<OrderDetail> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
+                onTap: () async{
+                  await saveOrderData(
+                  status: false, 
+                  orderType: orderType,
+                  custID: widget.customerID,
+                  provID: widget.shopName,
+                  price: calculateTotalPrice(),
+                  address: widget.userProfile.toString(), 
+                  preference: selectedPreferences,
+                  shopImage: widget.shopPic,
+                  orderdate: this.selectedDate,
+                  ); 
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(16.0),
@@ -327,4 +342,29 @@ class _OrderDetailState extends State<OrderDetail> {
   double calculateTotalPrice() {
     return 0.0;
   }
+
+  Future<void> saveOrderData({
+  required bool status,
+  required String orderType,
+  required BigInt custID, 
+  required String provID,
+  required double price,
+  required String address,
+  required List<String> preference,
+  required String shopImage, 
+  required DateTime orderdate,
+}) async {
+  final order = OrderModel(
+    status: status, 
+    orderType: orderType, 
+    custID: custID, 
+    provID: provID, 
+    price: price, 
+    address: address, 
+    preference: preference, 
+    shopImage: shopImage,
+     orderdate: orderdate
+     );
+  await HiveCRUD.addOrder(order); 
+}
 }

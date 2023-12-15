@@ -197,6 +197,7 @@ class _SignUpState extends State<SignUp> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Home(
+                                    userId: BigInt.from(0.9999), 
                                     userName: nameController.text,
                                     userEmail: emailController.text,
                                     userPhoneNumber: phoneController.text,
