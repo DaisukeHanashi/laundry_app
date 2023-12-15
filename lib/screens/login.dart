@@ -140,7 +140,10 @@ class Login extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Home(
-                                     userId: user.user_id, userName: user.name, userEmail:user.email, userPhoneNumber:user.phoneNumber,
+                                     userId: user.user_id,
+                                      userName: user.name,
+                                      userEmail: user.email,
+                                      userPhoneNumber: user.phoneNumber,
                                       
                                     ),
                                   ),

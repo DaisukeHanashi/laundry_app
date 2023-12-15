@@ -2,11 +2,11 @@ import 'package:hive/hive.dart';
 
 part 'order_model.g.dart'; 
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 105)
 class OrderModel{
 
   @HiveField(0)
-  final bool status; 
+  final int status; 
 
   @HiveField(1)
   final String orderType; 
@@ -32,6 +32,9 @@ class OrderModel{
   @HiveField(8)
   final DateTime orderdate;
 
+  @HiveField(9)
+  final DateTime pickupTime; 
+
   OrderModel({
   required this.status,
   required this.orderType,
@@ -42,10 +45,11 @@ class OrderModel{
   required this.preference,
   required this.shopImage, 
   required this.orderdate,
+  required this.pickupTime,
   });
 
 OrderModel copyWith({
-  bool? status, 
+  int? status, 
   String? orderType, 
   BigInt? custID,
   String? provID,
@@ -54,6 +58,7 @@ OrderModel copyWith({
   List<String>? preference, 
   String? shopImage,
   DateTime? orderdate, 
+  DateTime? pickupTime,
 }){
   return OrderModel(
     status: status ?? this.status,
@@ -65,6 +70,7 @@ OrderModel copyWith({
     preference: preference ?? this.preference,
     shopImage: shopImage ?? this.shopImage,
     orderdate: orderdate ?? this.orderdate, 
+    pickupTime: pickupTime ?? this.pickupTime
   );
 }
 

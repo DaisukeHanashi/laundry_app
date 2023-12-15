@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widget/reschedul.dart';
+import '../utils/order_model.dart';
 
 class Order {
   final String storeName;
@@ -16,8 +17,9 @@ class Order {
 }
 
 class PickupOrders extends StatefulWidget {
+    final BigInt userID;
 
-  const PickupOrders({Key? key}) : super(key: key);
+  const PickupOrders({Key? key, required this.userID}) : super(key: key);
 
   @override
   _PickupOrdersState createState() => _PickupOrdersState();
@@ -90,7 +92,7 @@ class _PickupOrdersState extends State<PickupOrders> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-              child: Text(order.isConfirmed ? 'Confirmed' : 'Confirm'),
+              child: Text(order.isConfirmed ? 'Confirmed' : 'TBC'),
             ),
           ],
         ),
@@ -112,7 +114,7 @@ class _PickupOrdersState extends State<PickupOrders> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Reschedule(),
+                    builder: (context) =>  Reschedule(custID: widget.userID),
                   ),
                 );
               },

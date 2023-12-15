@@ -1,4 +1,10 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'user_model.dart';
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
 
 class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
@@ -22,6 +28,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.user_id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)

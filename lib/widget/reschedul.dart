@@ -10,7 +10,8 @@ import 'pickup_model.dart';
 import 'pickup_time.dart';
 
 class Reschedule extends StatefulWidget {
-  const Reschedule({super.key});
+  final BigInt custID; 
+  const Reschedule({super.key, required this.custID});
 
   @override
   _RescheduleState createState() => _RescheduleState();
@@ -149,7 +150,7 @@ class _RescheduleState extends State<Reschedule> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const PickupOrders(),
+                  builder: (context) =>  PickupOrders(userID: widget.custID),
                 ),
               );
             },

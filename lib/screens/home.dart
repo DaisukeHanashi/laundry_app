@@ -221,7 +221,7 @@ class _HomeState extends State<Home> {
         onTap: () {
           List<Widget> screens = [
             PaymentScreen(),  
-            const PickupOrders(),
+            PickupOrders(userID: widget.userId),
             OrderProvider(userID: widget.userId),
             const DeliveryOrder(),
             const ToRate(),

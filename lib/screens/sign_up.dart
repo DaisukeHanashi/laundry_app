@@ -3,6 +3,7 @@ import 'package:laundry_app/screens/home.dart';
 import '../utils/hive_crud.dart';
 import '../utils/user_model.dart';
 import 'login.dart';
+import 'dart:math';
 
 
 
@@ -184,48 +185,80 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                           GestureDetector(
-                            onTap: () async {
-                              await saveUserData(
-                                name: nameController.text,
-                                email: emailController.text,
-                                phoneNumber: phoneController.text,
-                                password: passwordController.text,
-                              );
+GestureDetector(
+                              onTap: () async {
+                                bool isSignUpSuccessful = await saveUserData(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  phoneNumber: phoneController.text,
+                                  password: passwordController.text,
+                                );
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Home(
-                                    userId: BigInt.from(0.9999), 
-                                    userName: nameController.text,
-                                    userEmail: emailController.text,
-                                    userPhoneNumber: phoneController.text,
-                                  ),
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        isSignUpSuccessful
+                                            ? 'Success'
+                                            : 'Failed',
+                                        style: TextStyle(
+                                            color: isSignUpSuccessful
+                                                ? Colors.green
+                                                : Colors.red),
+                                      ),
+                                      content: Text(
+                                        isSignUpSuccessful
+                                            ? 'Sign up successful! You can now log in.'
+                                            : 'Sign up failed. Please try again.',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog
+                                            if (isSignUpSuccessful) {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => Login(
+                                                    email: ' ',
+                                                    password: ' ',
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 280,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: const Color(0xFF0E5C46),
                                 ),
-                              );
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: 280,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: const Color(0xFF0E5C46),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Text(
-                                  'Sign up',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                child: const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Text(
+                                    'Sign up',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
+
+
                             const SizedBox(height: 15),
                             RichText(
                               text: TextSpan(
@@ -274,29 +307,34 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Future<void> saveUserData({
+Future<bool> saveUserData({
   required String name,
   required String email,
   required String phoneNumber,
   required String password,
 }) async {
-  final user = UserModel(
-    name: name,
-    email: email,
-    phoneNumber: phoneNumber,
-    password: password,
-  );
+  try {
+    // Generate a random user ID
+    final randomUserId = BigInt.from(Random().nextInt(999999));
 
-  await HiveCRUD.addUser(user);
+    final user = UserModel(
+      user_id: randomUserId,
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
+    );
 
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Login(
-        email: email,
-        password: password,
-      ),
-    ),
-  );
+    await HiveCRUD.addUser(user);
+
+    // Return true if user addition was successful
+    return true;
+  } catch (e) {
+    // Log the error or handle it as needed
+    print('Error saving user data: $e');
+
+    // Return false to indicate failure
+    return false;
+  }
 }
 }

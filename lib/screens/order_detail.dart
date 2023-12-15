@@ -29,6 +29,7 @@ class _OrderDetailState extends State<OrderDetail> {
   String preferences = '';
   List<String> selectedPreferences = [];
   DateTime selectedDate = DateTime.now();
+  DateTime bookedDate = DateTime.now(); 
   bool isScheduled = false;
   bool isRescheduled = false;
   String orderType = ''; 
@@ -250,24 +251,66 @@ class _OrderDetailState extends State<OrderDetail> {
                     ),
                   ),
             const SizedBox(height: 16),
-            Container(
+           Container(
               decoration: BoxDecoration(
                 color: const Color(0xFF0E5C46),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: GestureDetector(
-                onTap: () async{
-                  await saveOrderData(
-                  status: false, 
-                  orderType: orderType,
-                  custID: widget.customerID,
-                  provID: widget.shopName,
-                  price: calculateTotalPrice(),
-                  address: widget.userProfile.toString(), 
-                  preference: selectedPreferences,
-                  shopImage: widget.shopPic,
-                  orderdate: this.selectedDate,
-                  ); 
+                onTap: () async {
+                  bool isBookingSuccessful = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Confirmation'),
+                        content:
+                            Text('Are you sure you want to book this order?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context,
+                                  false); // Close the dialog with false
+                            },
+                            child: Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              Navigator.pop(
+                                  context, true); // Close the dialog with true
+                              // Perform the booking action here
+                              await saveOrderData(
+                                status: 0,
+                                orderType: orderType,
+                                custID: widget.customerID,
+                                provID: widget.shopName,
+                                price: calculateTotalPrice(),
+                                address: widget.userProfile.toString(),
+                                preference: selectedPreferences,
+                                shopImage: widget.shopPic,
+                                orderdate: this.bookedDate,
+                                pickupTime: this.selectedDate,
+                              );
+                            },
+                            child: Text('Book'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+
+                  if (isBookingSuccessful != null && isBookingSuccessful) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Order booked successfully!'),
+                      ),
+                    );
+                  } else if (isBookingSuccessful != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Booking failed.'),
+                      ),
+                    );
+                  }
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(16.0),
@@ -283,6 +326,7 @@ class _OrderDetailState extends State<OrderDetail> {
                 ),
               ),
             ),
+
           ],
         ),
       ),
@@ -344,7 +388,7 @@ class _OrderDetailState extends State<OrderDetail> {
   }
 
   Future<void> saveOrderData({
-  required bool status,
+  required int status,
   required String orderType,
   required BigInt custID, 
   required String provID,
@@ -353,6 +397,7 @@ class _OrderDetailState extends State<OrderDetail> {
   required List<String> preference,
   required String shopImage, 
   required DateTime orderdate,
+  required DateTime pickupTime, 
 }) async {
   final order = OrderModel(
     status: status, 
@@ -363,7 +408,8 @@ class _OrderDetailState extends State<OrderDetail> {
     address: address, 
     preference: preference, 
     shopImage: shopImage,
-     orderdate: orderdate
+     orderdate: orderdate,
+     pickupTime: pickupTime,
      );
   await HiveCRUD.addOrder(order); 
 }

@@ -36,8 +36,9 @@ class DatabaseHelper {
         await db.execute('''CREATE TABLE orders(
           id BIGINT PRIMARY KEY AUTO_INCREMENT, 
           orderType VARCHAR(30), 
-          status BOOLEAN, 
+          status INT, 
           custID BIGINT NOT NULL, 
+          FOREIGN KEY (custID) REFERENCES users(id)
           provID BIGINT, 
           price DECIMAL(5,2),
           preferences ENUM,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:laundry_app/screens/landing_page.dart';
 import 'utils/user_model.dart';
+import 'utils/order_model.dart';
 
 
 
@@ -11,6 +12,7 @@ import 'utils/user_model.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter()); 
+  Hive.registerAdapter(OrderModelAdapter()); 
   runApp(const MyApp());
 }
 

@@ -49,8 +49,8 @@ static Future<List<OrderModel>> getOrders(BigInt customer) async{
    final orderBox = await Hive.openBox<OrderModel>(orderName);
    final orderList = orderBox.values
       .where((order) => order.custID == customer)
-      .toList();
-
+      .toList(growable: true);
+    print(orderList); 
     await orderBox.close();
     return orderList;
 }

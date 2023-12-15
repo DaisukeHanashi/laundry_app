@@ -179,6 +179,7 @@ class _DeliverySignupState extends State<DeliverySignup> {
                             GestureDetector(
                               onTap: () async {
                                 await saveUserData(
+                                  user_id: BigInt.from(1),
                                   name: 'John Doe',
                                   email: 'john@example.com',
                                   phoneNumber: '1234567890',
@@ -227,6 +228,7 @@ class _DeliverySignupState extends State<DeliverySignup> {
   }
 
   Future<void> saveUserData({
+    required BigInt user_id,
     required String name,
     required String email,
     required String phoneNumber,
@@ -234,6 +236,7 @@ class _DeliverySignupState extends State<DeliverySignup> {
   }) async {
     final userBox = await Hive.openBox<UserModel>('users');
     final user = UserModel(
+      user_id: user_id,
       name: name,
       email: email,
       phoneNumber: phoneNumber,

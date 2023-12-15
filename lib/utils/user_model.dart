@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'dart:math'; 
 part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -20,19 +19,12 @@ class UserModel {
   final String password;
 
   UserModel({
-    BigInt? user_id, 
+    required this.user_id, 
     required this.name,
     required this.email,
     required this.phoneNumber,
     required this.password,
-  }): user_id = user_id ?? _generateRandomUserId();
-
-  static BigInt _generateRandomUserId() {
-    final random = Random();
-    // You can adjust the number of bits based on your requirements
-    final randomBits = List.generate(128, (_) => random.nextInt(2)).join('');
-    return BigInt.parse(randomBits, radix: 2);
-  }
+  });
 
   UserModel copyWith({
     BigInt? user_id,
