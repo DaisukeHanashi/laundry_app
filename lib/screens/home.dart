@@ -222,7 +222,7 @@ class _HomeState extends State<Home> {
           List<Widget> screens = [
             PaymentScreen(),  
             const PickupOrders(),
-            OrderProvider(),
+            OrderProvider(userID: widget.userId),
             const DeliveryOrder(),
             const ToRate(),
           ];

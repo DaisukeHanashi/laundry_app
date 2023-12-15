@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'track_status.dart'; 
-import '../utils/hive_crud.dart'; 
-import '../utils/order_model.dart'; 
+import 'track_status.dart';
+import '../utils/hive_crud.dart';
+import '../utils/order_model.dart';
 
-class OrderProvider extends StatelessWidget {
-  final List<Order> orderStatus = [
-    Order(
-      date: '12-25-23',
-      shopName: 'Berry Clean',
-      shopImage: 'assets/berryclean.jpg',
-    ),
-    Order(
-      date: '12-26-23',
-      shopName: 'Rinse',
-      shopImage: 'assets/rinse.png',
-    ),
-  ];
+class OrderProvider extends StatefulWidget {
+  final BigInt userID;
 
-  OrderProvider({Key? key}) : super(key: key);
+  OrderProvider({Key? key, required this.userID}) : super(key: key);
+
+  @override
+  _OrderProviderState createState() => _OrderProviderState();
+}
+
+class _OrderProviderState extends State<OrderProvider> {
+  late Future<List<OrderModel>> _orderListFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _orderListFuture = HiveCRUD.getOrders(widget.userID);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +28,37 @@ class OrderProvider extends StatelessWidget {
         title: const Text('Order Status'),
         backgroundColor: const Color(0xFF0E5C46),
       ),
-      body: ListView.builder(
-        itemCount: orderStatus.length,
-        itemBuilder: (context, index) {
-          return buildOrderItem(context, orderStatus[index]);
+      body: FutureBuilder<List<OrderModel>>(
+        future: _orderListFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No orders found.'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return buildOrderItem(context, snapshot.data![index]);
+              },
+            );
+          }
         },
       ),
     );
   }
 
-  void navigateToOrderTracking(BuildContext context, Order order) {
+  void navigateToOrderTracking(BuildContext context, OrderModel order) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => OrderTracking(),
+      MaterialPageRoute(    builder: (context) => OrderTracking(),
       ),
     );
   }
 
-  Widget buildOrderItem(BuildContext context, Order order) {
+  Widget buildOrderItem(BuildContext context, OrderModel order) {
     return GestureDetector(
       onTap: () {
         navigateToOrderTracking(context, order);
@@ -62,14 +76,14 @@ class OrderProvider extends StatelessWidget {
               ),
               title: Row(
                 children: [
-                  Text(order.shopName),
+                  Text(order.provID),
                   const Spacer(),
                 ],
               ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(order.date),
+                  Text(order.orderdate.toString()),
                 ],
               ),
             ),
@@ -78,16 +92,4 @@ class OrderProvider extends StatelessWidget {
       ),
     );
   }
-}
-
-class Order {
-  final String date;
-  final String shopName;
-  final String shopImage;
-
-  Order({
-    required this.date,
-    required this.shopName,
-    required this.shopImage,
-  });
-}
+}       
