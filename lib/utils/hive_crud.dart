@@ -1,8 +1,10 @@
 import 'package:hive/hive.dart';
 import '../utils/user_model.dart';
+import '../utils/order_model.dart'; 
 
 class HiveCRUD {
   static const String boxName = 'users';
+  static const String orderName = 'orders'; 
 
   static Future<void> addUser(UserModel user) async {
     final userBox = await Hive.openBox<UserModel>(boxName);
@@ -35,5 +37,29 @@ class HiveCRUD {
     final box = await Hive.openBox<UserModel>(boxName);
     await box.clear(); 
     await box.addAll(users); 
+  }
+ 
+static Future<void> addOrder(OrderModel order) async{
+  final orderBox = await Hive.openBox<OrderModel>(orderName); 
+  await orderBox.add(order); 
+  await orderBox.close(); 
+}
+
+static Future<List<OrderModel>> getOrders() async{
+   final orderBox = await Hive.openBox<OrderModel>(orderName);
+    final orderList = orderBox.values.toList();
+    await orderBox.close();
+    return orderList;
+}
+
+static Future<void> updateOrder(int index, OrderModel updatedOrder) async{
+   final orderBox = await Hive.openBox<OrderModel>(orderName); 
+  await orderBox.put(index, updatedOrder); 
+  await orderBox.close(); 
+}
+ static Future<void> deleteOrder(int index) async {
+    final orderBox = await Hive.openBox<OrderModel>(orderName);
+    await orderBox.deleteAt(index);
+    await orderBox.close();
   }
 }

@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
 
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2 
@@ -43,9 +44,9 @@ dependencies:
   search_choices: ^2.2.7
   provider: ^6.1.1
   shared_preferences: ^2.0.8
-  intl: ^0.17.0
-  flutter_map: ^0.14.0 
-  latlong2: ^0.8.2
+  intl: ^0.19.0
+  flutter_map: 6.1.0
+  latlong2: ^0.9.0
   flutter_rating_bar: ^4.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -58,6 +59,19 @@ dependencies:
   collection: ^1.17.2
   sqflite: ^2.0.0
   path: ^1.8.3
+  pdfx: 
+    git:
+     url: 'https://github.com/ScerIO/packages.flutter' 
+     ref: '4be9de9ffed5398fd7d5f44bbb07dcd3d3f1711b'  
+     path: packages/pdfx
+
+  analyzer: ^6.2.0 
+  matcher: ^0.12.16 
+  material_color_utilities: ^0.5.0 
+  meta: ^1.10.0 
+  test_api: ^0.6.1 
+
+  web: ^0.3.0 
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +82,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -93,6 +107,7 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

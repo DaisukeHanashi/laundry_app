@@ -39,17 +39,17 @@ class TrackRider extends StatelessWidget {
               center: LatLng(10.322012828264846, 123.8948697371247),
               zoom: 14.0,
             ),
-            layers: [
-              TileLayerOptions(
+            children: [
+              TileLayer(
                 urlTemplate:
                     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 subdomains: ['a', 'b', 'c'],
               ),
-              MarkerLayerOptions(
+              MarkerLayer(
                 markers: [
                   Marker(
                     point: LatLng(37.7749, -122.4194),
-                    builder: (context) => const Icon(
+                    child: Icon(
                       Icons.location_pin,
                       color: Colors.red,
                     ),

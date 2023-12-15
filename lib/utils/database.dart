@@ -24,13 +24,23 @@ class DatabaseHelper {
       version: 1,
       onCreate: (db, version) async {
         await db.execute('''
-          CREATE TABLE Users (
-            id INTEGER PRIMARY KEY,
+          CREATE TABLE users (
+            id INTEGER PRIMARY KEY AUTO_INCREMENT,
             name TEXT,
             email TEXT,
             password TEXT,
             phoneNumber TEXT
           )
+        ''');
+
+        await db.execute('''CREATE TABLE orders(
+          id BIGINT PRIMARY KEY AUTO_INCREMENT, 
+          status BOOLEAN, 
+          custID BIGINT NOT NULL, 
+          provID BIGINT, 
+          price DECIMAL(5,2),
+          address TEXT
+        )
         ''');
       },
     );

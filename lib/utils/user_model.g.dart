@@ -21,7 +21,6 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)

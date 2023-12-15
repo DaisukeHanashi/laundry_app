@@ -32,18 +32,18 @@ class _NewAddressPageState extends State<NewAddressPage> {
                   center: LatLng(37.7749, -122.4194),
                   zoom: 12.0,
                 ),
-                layers: [
-                  TileLayerOptions(
+                children: [ 
+                  TileLayer(
                     urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                     subdomains: ['a', 'b', 'c'],
                   ),
-                  MarkerLayerOptions(
+                  MarkerLayer(
                     markers: [
                       Marker(
                         width: 30.0,
                         height: 30.0,
                         point: LatLng(10.320871641682267, 123.89923683141133),
-                        builder: (ctx) => const Icon(
+                        child: Icon(
                           Icons.location_on,
                           color: Colors.blue,
                           size: 30,
