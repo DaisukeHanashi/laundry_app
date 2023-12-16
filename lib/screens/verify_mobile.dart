@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../utils/user_model.dart';
 import 'enable.dart';
 
 
 class VerifyMobile extends StatelessWidget {
-  const VerifyMobile ({Key? key}) : super(key: key);
+  final UserModel user; 
+  const VerifyMobile ({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +175,7 @@ class VerifyMobile extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const TwoFactorAuthenticationSetup()),
+                                MaterialPageRoute(builder: (context) => TwoFactorAuthenticationSetup(user: user)),
                               );
                             },
                             child: Container(

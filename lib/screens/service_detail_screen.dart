@@ -18,7 +18,7 @@ import 'see_reviews.dart';
 class ServiceDetailScreen extends StatefulWidget {
   final ServiceDetail serviceDetail;
   final String? selectedImage;
-  final BigInt customerID; 
+  final String customerID; 
 
   const ServiceDetailScreen(
       {Key? key, required this.serviceDetail, required this.customerID, this.selectedImage})

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:laundry_app/screens/invoice.dart';
 import 'package:laundry_app/widget/my_address.dart';
 
+import '../utils/user_model.dart';
 import 'credit.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
+  final UserModel user; 
   final double totalAmount;
 
-  const PaymentMethodScreen({Key? key, required this.totalAmount})
+  const PaymentMethodScreen({Key? key, required this.totalAmount, required this.user})
       : super(key: key);
 
   @override
@@ -116,7 +118,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CashInCreditPaymentScreen(),
+                    builder: (context) =>  CashInCreditPaymentScreen(user: widget.user),
                   ),
                 );
               },

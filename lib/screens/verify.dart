@@ -3,8 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:laundry_app/screens/sign_up.dart';
 import 'package:laundry_app/screens/verify_mobile.dart';
 
+import '../utils/user_model.dart';
+
 class Verify extends StatelessWidget {
-  const Verify({Key? key}) : super(key: key);
+  final UserModel user; 
+  const Verify({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +180,7 @@ class Verify extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const VerifyMobile()),
+                                    builder: (context) =>  VerifyMobile(user: user)),
                               );
                             },
                             child: Container(

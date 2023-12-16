@@ -19,7 +19,7 @@ import 'see_reviews.dart';
 class ShopDetails extends StatefulWidget {
   final ShopDetail shopDetails;
   final String? selectedImage;
-  final BigInt customerID; 
+  final String customerID; 
 
   const ShopDetails({super.key, required this.shopDetails, required this.customerID, this.selectedImage});
 

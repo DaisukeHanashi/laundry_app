@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../utils/user_model.dart';
 import 'verify_mobile.dart'; // Import the VerifyMobile screen file
 
 class AddPhoneNumberScreen extends StatelessWidget {
-  const AddPhoneNumberScreen({Key? key}) : super(key: key);
+  final UserModel user; 
+  const AddPhoneNumberScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class AddPhoneNumberScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const VerifyMobile()),
+                    MaterialPageRoute(builder: (context) =>  VerifyMobile(user: user)),
                   );
                 },
                 style: ElevatedButton.styleFrom(

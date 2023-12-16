@@ -17,42 +17,45 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return OrderModel(
-      status: fields[0] as int,
-      orderType: fields[1] as String,
-      custID: fields[2] as BigInt,
-      provID: fields[3] as String,
-      price: fields[4] as double,
-      address: fields[5] as String,
-      preference: (fields[6] as List).cast<String>(),
-      shopImage: fields[7] as String,
-      orderdate: fields[8] as DateTime,
-      pickupTime: fields[9] as DateTime,
+      orderID: fields[0] as String,
+      status: fields[1] as int,
+      orderType: fields[2] as String,
+      custID: fields[3] as String,
+      provID: fields[4] as String,
+      price: fields[5] as double,
+      address: fields[6] as String,
+      preference: (fields[7] as List).cast<String>(),
+      shopImage: fields[8] as String,
+      orderdate: fields[9] as DateTime,
+      pickupTime: fields[10] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, OrderModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
-      ..write(obj.status)
+      ..write(obj.orderID.toString())
       ..writeByte(1)
-      ..write(obj.orderType)
+      ..write(obj.status)
       ..writeByte(2)
-      ..write(obj.custID)
+      ..write(obj.orderType)
       ..writeByte(3)
-      ..write(obj.provID)
+      ..write(obj.custID)
       ..writeByte(4)
-      ..write(obj.price)
+      ..write(obj.provID)
       ..writeByte(5)
-      ..write(obj.address)
+      ..write(obj.price)
       ..writeByte(6)
-      ..write(obj.preference)
+      ..write(obj.address)
       ..writeByte(7)
-      ..write(obj.shopImage)
+      ..write(obj.preference)
       ..writeByte(8)
-      ..write(obj.orderdate)
+      ..write(obj.shopImage)
       ..writeByte(9)
+      ..write(obj.orderdate)
+      ..writeByte(10)
       ..write(obj.pickupTime);
   }
 

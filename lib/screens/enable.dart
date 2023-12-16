@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../utils/user_model.dart';
 import 'authentication.dart';
 import 'email.dart';
 import 'sms.dart';
 
 class TwoFactorAuthenticationSetup extends StatefulWidget {
-  const TwoFactorAuthenticationSetup({Key? key}) : super(key: key);
+  final UserModel user; 
+  const TwoFactorAuthenticationSetup({Key? key, required this.user}) : super(key: key);
 
   @override
   _TwoFactorAuthenticationSetupState createState() =>
@@ -49,7 +51,7 @@ class _TwoFactorAuthenticationSetupState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SMSToggleScreen(),
+                  builder: (context) =>  SMSToggleScreen(user: widget.user),
                 ),
               );
             }),
@@ -58,7 +60,7 @@ class _TwoFactorAuthenticationSetupState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const EmailToggleScreen(),
+                  builder: (context) =>  EmailToggleScreen(user: widget.user),
                 ),
               );
             }),
@@ -67,7 +69,7 @@ class _TwoFactorAuthenticationSetupState
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AuthenticatorToggleScreen(),
+                  builder: (context) =>  AuthenticatorToggleScreen(user: widget.user),
                 ),
               );
             }),

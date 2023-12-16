@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/shop_details.dart';
 
 class LaundryShopListScreen extends StatefulWidget {
-  final BigInt custID;
+  final String custID;
 
   const LaundryShopListScreen({super.key, required this.custID}); 
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../utils/user_model.dart';
 import 'success.dart';
 
 class EmailToggleScreen extends StatefulWidget {
-  const EmailToggleScreen({Key? key}) : super(key: key);
+  final UserModel user; 
+  const EmailToggleScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   _EmailToggleScreenState createState() => _EmailToggleScreenState();
@@ -71,7 +73,7 @@ class _EmailToggleScreenState extends State<EmailToggleScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Success()),
+                    MaterialPageRoute(builder: (context) =>  Success(user: widget.user)),
                   );
                 },
                 child: const Text('OK'),

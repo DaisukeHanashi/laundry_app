@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../widget/reschedul.dart';
 import '../utils/order_model.dart';
+import '../utils/user_model.dart';
+import '../utils/hive_crud.dart';
+import '../screens/home.dart';
 
 class Order {
   final String storeName;
@@ -17,57 +21,92 @@ class Order {
 }
 
 class PickupOrders extends StatefulWidget {
-    final BigInt userID;
+    final UserModel user;
 
-  const PickupOrders({Key? key, required this.userID}) : super(key: key);
+  const PickupOrders({Key? key, required this.user}) : super(key: key);
 
   @override
   _PickupOrdersState createState() => _PickupOrdersState();
 }
 
 class _PickupOrdersState extends State<PickupOrders> {
-  List<Order> orders = [
-    Order(storeName: 'Berry Clean', pickupTime: '10:00 am', pickupDate: '12-25-2023'),
-    Order(storeName: 'Rinse', pickupTime: '11:30 am', pickupDate: '12-26-2023'),
-  ];
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pickup Orders'),
-        backgroundColor: const Color(0xFF0E5C46),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: orders.map((order) => _buildOrderItem(order)).toList(),
-      ),
-    );
-  }
+  late Future<List<OrderModel>> _orderListFuture; 
 
-  Widget _buildOrderItem(Order order) {
+   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Perform actions that should run every time the widget is built here
+    _orderListFuture = HiveCRUD.getOrders(widget.user.user_id);
+  }
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Pickup Orders'),
+      backgroundColor: const Color(0xFF0E5C46),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Home(
+                user: widget.user,
+              ),
+            ),
+          ),
+        ),
+    ),
+    body: FutureBuilder<List<OrderModel>>(
+      future: _orderListFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show a loading indicator while waiting for the data
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          // Handle errors
+          return  Center( 
+            child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          // Handle the case where there is no data
+          return const Center( 
+            child: Text('No orders available.'));
+        } else {
+          // Data is available, build the ListView
+          List<OrderModel> _orderList = snapshot.data!;
+          return ListView(
+            padding: const EdgeInsets.all(16.0),
+            children: _orderList.map((order) => _buildOrderItem(order)).toList(),
+          );
+        }
+      },
+    ),
+  );
+}
+
+  Widget _buildOrderItem(OrderModel order) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          order.storeName,
+          order.provID,
           style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8.0),
         Text(
-          'Pick up time: ${order.pickupTime}',
+          'Pick up time: ${DateFormat('h:mm a').format(order.pickupTime)}',
           style: const TextStyle(fontSize: 16.0),
         ),
         const SizedBox(height: 8.0),
         Text(
-          'Pick up date: ${order.pickupDate}',
+          'Pick up date: ${DateFormat('yyyy-MM-dd').format(order.pickupTime)}',
           style: const TextStyle(fontSize: 16.0),
         ),
         const SizedBox(height: 16.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            if (!order.isConfirmed)
+            if (order.status == 0)
               ElevatedButton(
                 onPressed: () {
                   showRescheduleDialog(order);
@@ -87,12 +126,12 @@ class _PickupOrdersState extends State<PickupOrders> {
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(120, 40),
-                backgroundColor: order.isConfirmed ? Colors.green : const Color(0xFF0E5C46),
+                backgroundColor: order.status == 1 ? Colors.green : const Color(0xFF0E5C46),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-              child: Text(order.isConfirmed ? 'Confirmed' : 'TBC'),
+              child: Text(order.status == 1 ? 'Confirmed' : 'TBC'),
             ),
           ],
         ),
@@ -101,7 +140,7 @@ class _PickupOrdersState extends State<PickupOrders> {
     );
   }
 
-  void showRescheduleDialog(Order order) {
+  void showRescheduleDialog(OrderModel order) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -114,7 +153,7 @@ class _PickupOrdersState extends State<PickupOrders> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  Reschedule(custID: widget.userID),
+                    builder: (context) =>  Reschedule(user: widget.user, exOrder: order,),
                   ),
                 );
               },
@@ -132,7 +171,7 @@ class _PickupOrdersState extends State<PickupOrders> {
     );
   }
 
-  void showConfirmDialog(Order order) {
+  void showConfirmDialog(OrderModel order) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -143,7 +182,7 @@ class _PickupOrdersState extends State<PickupOrders> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  order.isConfirmed = true;
+                  order.status = 1;
                 });
                 Navigator.of(context).pop();
               },

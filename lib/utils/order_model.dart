@@ -6,36 +6,40 @@ part 'order_model.g.dart';
 class OrderModel{
 
   @HiveField(0)
-  final int status; 
+   final String orderID; 
 
   @HiveField(1)
-  final String orderType; 
+   int status; 
 
   @HiveField(2)
-  final BigInt custID; 
+  final String orderType; 
 
   @HiveField(3)
-  final String provID; 
+  final String custID; 
 
   @HiveField(4)
-  final double price; 
+  final String provID; 
 
   @HiveField(5)
-  final String address; 
+  final double price; 
 
   @HiveField(6)
-  final List<String> preference; 
+  final String address; 
 
   @HiveField(7)
-  final String shopImage; 
+  final List<String> preference; 
 
   @HiveField(8)
-  final DateTime orderdate;
+  final String shopImage; 
 
   @HiveField(9)
-  final DateTime pickupTime; 
+  final DateTime orderdate;
+
+  @HiveField(10)
+   DateTime pickupTime; 
 
   OrderModel({
+  required this.orderID,
   required this.status,
   required this.orderType,
   required this.custID, 
@@ -49,9 +53,10 @@ class OrderModel{
   });
 
 OrderModel copyWith({
+  String? orderID,
   int? status, 
   String? orderType, 
-  BigInt? custID,
+  String? custID,
   String? provID,
   double? price,
   String? address,
@@ -61,6 +66,7 @@ OrderModel copyWith({
   DateTime? pickupTime,
 }){
   return OrderModel(
+    orderID: orderID ?? this.orderID,
     status: status ?? this.status,
     orderType: orderType ?? this.orderType,
     custID: custID ?? this.custID,

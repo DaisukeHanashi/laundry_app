@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/screens/home.dart';
 
+import '../utils/user_model.dart';
+
 class CashInCreditPaymentScreen extends StatefulWidget {
-  const CashInCreditPaymentScreen({super.key});
+  final UserModel user; 
+  const CashInCreditPaymentScreen({super.key, required this.user});
 
   @override
   _CashInCreditPaymentScreenState createState() => _CashInCreditPaymentScreenState();
@@ -86,7 +89,7 @@ class _CashInCreditPaymentScreenState extends State<CashInCreditPaymentScreen> {
           TextButton(
             onPressed: () {
               Navigator.push(context,MaterialPageRoute(
-                    builder: (context) => Home(userId: BigInt.from(0.9999), userName: '', userEmail: '', userPhoneNumber: '',)));
+                    builder: (context) => Home(user: widget.user)));
             },
             child: const Text('OK'),
           ),

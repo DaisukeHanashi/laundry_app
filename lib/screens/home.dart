@@ -15,6 +15,7 @@ import '../utils/app_space.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
 import '../utils/work_categories_model.dart';
+import '../utils/user_model.dart';
 import '../widget/popular_shops.dart';
 import '../widget/search_container.dart';
 import 'build_drawer.dart';
@@ -24,18 +25,12 @@ import 'service_detail_screen.dart';
 import 'to_rate.dart';
 
 class Home extends StatefulWidget {
-  final BigInt userId; 
-  final String userName;
-  final String userEmail;
-  final String userPhoneNumber;
+  final UserModel user;
  double defaultval = 0.9999;
 
    Home({
     super.key,
-    required this.userId,
-    required this.userName,
-    required this.userEmail,
-    required this.userPhoneNumber,
+    required this.user,
   });
 
   @override
@@ -62,7 +57,7 @@ class _HomeState extends State<Home> {
         statusBarIconBrightness: Brightness.light));
     return Scaffold(
       backgroundColor: AppColor.appColor,
-      drawer: AppDrawer(userDisplayName:'' , userEmail: '',),
+      drawer: AppDrawer(userDisplayName:widget.user.name , userEmail: widget.user.email,),
       body: SafeArea(
         child: ListView(
           physics: const BouncingScrollPhysics(),
@@ -72,7 +67,7 @@ class _HomeState extends State<Home> {
                 height: 50,
                 padding: const EdgeInsets.only(bottom: 12),
                 decoration: const BoxDecoration(color: Color(0xFF0E5C46)),
-                child: SearchContainer(userID: widget.userId)),
+                child: SearchContainer(userID: widget.user.user_id)),
             slider(),
             SizedBox(
               height: 10.h,
@@ -127,7 +122,7 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Notifications(),
+                      builder: (context) =>  Notifications(user: widget.user),
                     ),
                   );
                 },
@@ -221,9 +216,9 @@ class _HomeState extends State<Home> {
         onTap: () {
           List<Widget> screens = [
             PaymentScreen(),  
-            PickupOrders(userID: widget.userId),
-            OrderProvider(userID: widget.userId),
-            const DeliveryOrder(),
+            PickupOrders(user: widget.user),
+            OrderProvider(user: widget.user),
+             DeliveryOrder(user: widget.user),
             const ToRate(),
           ];
           Navigator.push(
@@ -289,7 +284,7 @@ class _HomeState extends State<Home> {
                           rating: '4.5',
                           image: 'assets/berryclean.jpg'),
                       selectedImage: servicesDetails[index].image,
-                      customerID: widget.userId,
+                      customerID: widget.user.user_id,
                     ),
                   ),
                 );

@@ -4,7 +4,7 @@ part 'user_model.g.dart';
 @HiveType(typeId: 0)
 class UserModel {
   @HiveField(0)
-  final BigInt user_id; 
+  final String user_id; 
   
   @HiveField(1)
   final String name;
@@ -27,7 +27,7 @@ class UserModel {
   });
 
   UserModel copyWith({
-    BigInt? user_id,
+    String? user_id,
     String? name,
     String? email,
     String? phoneNumber,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import '../delivery screen/delivery_signup.dart';
+import '../utils/user_model.dart';
 import 'login.dart';
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  final UserModel user; 
+  const AccountScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   _AccountScreenState createState() => _AccountScreenState();
@@ -67,7 +69,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                  builder: (context) => const DeliverySignup()),
+                  builder: (context) =>  DeliverySignup(user: widget.user)),
                                 );
                 if (currentIndex < 1) {
                   _pageController.nextPage(
@@ -78,7 +80,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                    builder: (context) => const Login(email: '', password: '',)),
+                    builder: (context) =>  Login()),
                     );
                 }
               },

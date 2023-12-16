@@ -221,10 +221,7 @@ GestureDetector(
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => Login(
-                                                    email: ' ',
-                                                    password: ' ',
-                                                  ),
+                                                  builder: (context) => Login(),
                                                 ),
                                               );
                                             }
@@ -318,7 +315,7 @@ Future<bool> saveUserData({
     final randomUserId = BigInt.from(Random().nextInt(999999));
 
     final user = UserModel(
-      user_id: randomUserId,
+      user_id: randomUserId.toString(),
       name: name,
       email: email,
       phoneNumber: phoneNumber,

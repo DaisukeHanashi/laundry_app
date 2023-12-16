@@ -4,9 +4,11 @@ import 'package:laundry_app/delivery%20screen/verify_account.dart';
 import 'package:laundry_app/screens/account.dart';
 import '../screens/login.dart';
 import '../utils/user_model.dart';
+import '../utils/hive_crud.dart'; 
 
 class DeliverySignup extends StatefulWidget {
-  const DeliverySignup({Key? key}) : super(key: key);
+  final UserModel user; 
+  const DeliverySignup({Key? key, required this.user}) : super(key: key);
 
   @override
   _DeliverySignupState createState() => _DeliverySignupState();
@@ -40,7 +42,7 @@ class _DeliverySignupState extends State<DeliverySignup> {
                       onTap: () {
                             Navigator.push( context, MaterialPageRoute(
                                       builder: (context) =>
-                                          const AccountScreen()),
+                                           AccountScreen(user: widget.user)),
                                 );
                           },
                       child: const Icon(Icons.arrow_back_ios_new_outlined,
@@ -179,7 +181,7 @@ class _DeliverySignupState extends State<DeliverySignup> {
                             GestureDetector(
                               onTap: () async {
                                 await saveUserData(
-                                  user_id: BigInt.from(1),
+                                  user_id: BigInt.from(1).toString(),
                                   name: 'John Doe',
                                   email: 'john@example.com',
                                   phoneNumber: '1234567890',
@@ -189,7 +191,7 @@ class _DeliverySignupState extends State<DeliverySignup> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const VerifyAccount()),
+                                           VerifyAccount(user: widget.user)),
                                 );
                               },
                               child: Container(
@@ -228,13 +230,12 @@ class _DeliverySignupState extends State<DeliverySignup> {
   }
 
   Future<void> saveUserData({
-    required BigInt user_id,
+    required String user_id,
     required String name,
     required String email,
     required String phoneNumber,
     required String password,
   }) async {
-    final userBox = await Hive.openBox<UserModel>('users');
     final user = UserModel(
       user_id: user_id,
       name: name,
@@ -242,16 +243,12 @@ class _DeliverySignupState extends State<DeliverySignup> {
       phoneNumber: phoneNumber,
       password: password,
     );
-    userBox.add(user);
-    await userBox.close();
+    await HiveCRUD.addUser(user); 
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Login(
-          email: email,
-          password: password,
-        ),
+        builder: (context) => Login(),
       ),
     );
   }

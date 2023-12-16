@@ -12,7 +12,8 @@ import '../widget/cards_screen.dart';
 import '../utils/user_model.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key});
+  final UserModel user;
+  const Profile({Key? key, required this.user});
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -150,7 +151,7 @@ class _ProfileState extends State<Profile> {
               context,
               MaterialPageRoute(
                 builder: (context) =>  Home(
-                  userId: BigInt.from(0.9999), userName: '',userEmail: '', userPhoneNumber: '',),
+                  user: widget.user),
               ),
             );
           },
@@ -244,7 +245,7 @@ class _ProfileState extends State<Profile> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const Login(email: '', password: ''),
+            builder: (context) => Login(),
           ),
         );
       },

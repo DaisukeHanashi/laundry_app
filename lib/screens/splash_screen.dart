@@ -99,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Login(email: '', password: '',)
+                            builder: (context) =>  Login()
                           ),
                         );
                       },
@@ -118,7 +118,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Login(email: '', password: '',)
+                            builder: (context) =>  Login()
                           ),
                         );
                       },

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:laundry_app/screens/home.dart'; 
+import '../utils/user_model.dart';
 import 'chat.dart';
 
 class TrackRider extends StatelessWidget {
+  final UserModel user; 
   final String riderName;
   final String phoneNumber;
   final String image;
 
   const TrackRider({
     Key? key,
+    required this.user,
     required this.riderName,
     required this.phoneNumber,
     required this.image,
@@ -27,8 +30,7 @@ class TrackRider extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) =>  Home(
-                  userId: BigInt.from(0.9999), userName: '', userEmail: '', userPhoneNumber: '',)));
+                MaterialPageRoute(builder: (context) =>  Home(user: user,)));
           },
         ),
       ),

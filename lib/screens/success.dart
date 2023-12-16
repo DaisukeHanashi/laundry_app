@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/screens/home.dart';
+import '../utils/user_model.dart';
  
 
 class Success extends StatelessWidget {
-  const Success({Key? key}) : super(key: key);
+  final UserModel user; 
+  const Success({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,7 @@ class Success extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) =>  Home(
-                     userId: BigInt.from(0.9999), userName: '', userEmail: '', userPhoneNumber: '',)),
+                    MaterialPageRoute(builder: (context) =>  Home(user: user)),
                   );
                 },
                 style: ElevatedButton.styleFrom(

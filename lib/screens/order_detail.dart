@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +15,7 @@ import '../utils/order_model.dart';
 class OrderDetail extends StatefulWidget {
   final MyAddress userProfile;
   final String shopPic; 
-  final BigInt customerID; 
+  final String customerID; 
   final String shopName; 
 
   const OrderDetail({Key? key, required this.userProfile, required this.shopPic, required this.customerID, required this.shopName}) : super(key: key);
@@ -390,7 +392,7 @@ class _OrderDetailState extends State<OrderDetail> {
   Future<void> saveOrderData({
   required int status,
   required String orderType,
-  required BigInt custID, 
+  required String custID, 
   required String provID,
   required double price,
   required String address,
@@ -399,7 +401,9 @@ class _OrderDetailState extends State<OrderDetail> {
   required DateTime orderdate,
   required DateTime pickupTime, 
 }) async {
+  final randomOrderId = BigInt.from(Random().nextInt(999999));
   final order = OrderModel(
+    orderID: randomOrderId.toString(),
     status: status, 
     orderType: orderType, 
     custID: custID, 

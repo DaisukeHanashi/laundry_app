@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/screens/track_rider.dart';
 
+import '../utils/user_model.dart';
+
 class DeliveryOrder extends StatefulWidget {
-  const DeliveryOrder({super.key});
+  final UserModel user; 
+  const DeliveryOrder({super.key, required this.user});
 
   @override
   _DeliveryOrderState createState() => _DeliveryOrderState();
@@ -53,7 +56,7 @@ class _DeliveryOrderState extends State<DeliveryOrder> {
                     Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const TrackRider(image: 'assets/driver.jpg', riderName: '', phoneNumber: '',)),
+                    builder: (context) =>  TrackRider(user: widget.user, image: 'assets/driver.jpg', riderName: '', phoneNumber: '',)),
               );
                   },
                   style: ElevatedButton.styleFrom(

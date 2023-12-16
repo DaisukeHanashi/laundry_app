@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:laundry_app/screens/pickup_orders.dart';
-
+import '../utils/hive_crud.dart'; 
 import '../utils/app_color.dart';
 import '../utils/app_string.dart';
 import '../utils/custom_text.dart';
+import '../utils/order_model.dart';
+import '../utils/user_model.dart'; 
 import 'pickup_model.dart';
 import 'pickup_time.dart';
 
 class Reschedule extends StatefulWidget {
-  final BigInt custID; 
-  const Reschedule({super.key, required this.custID});
+  final OrderModel exOrder; 
+  final UserModel user; 
+  const Reschedule({super.key, required this.user, required this.exOrder});
 
   @override
   _RescheduleState createState() => _RescheduleState();
@@ -22,6 +25,7 @@ class _RescheduleState extends State<Reschedule> {
   int dateIndex = 0;
   List<String> selectedPreferences = [];
   DateTime selectedDate = DateTime.now();
+  DateTime updatedDate = DateTime.now(); 
   bool isScheduled = false;
   bool isRescheduled = false;
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -119,7 +123,7 @@ class _RescheduleState extends State<Reschedule> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  showConfirmationDialog();
+                  showResecheduleDialog();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(420, 40),
@@ -137,27 +141,94 @@ class _RescheduleState extends State<Reschedule> {
     );
   }
 
-  void showConfirmationDialog() {
+  void showResecheduleDialog(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Updating Confirmation'),
+          content: const Text('Are you sure to reschedule the pickup?'),
+            actions: [
+          TextButton(
+            onPressed: () async {
+             bool isUpdateSuccessful = await saveOrderData(
+                orderID: widget.exOrder.orderID,
+                status: widget.exOrder.status, 
+                orderType: widget.exOrder.orderType, 
+                custID: widget.exOrder.custID, 
+                provID: widget.exOrder.provID, 
+                price: widget.exOrder.price, 
+                address: widget.exOrder.address, 
+                preference: widget.exOrder.preference, 
+                shopImage: widget.exOrder.shopImage, 
+                orderdate: updatedDate, 
+                pickupTime: selectedDate);
+                showConfirmationDialog(isUpdateSuccessful);
+            },
+            child: const Text('Yes'),
+          ),
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: const Text('No'),
+            )
+        ],
+        );
+      }
+    );
+  }
+
+  void showConfirmationDialog(bool isIt) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Reschedule Confirmation'),
-        content: const Text('Order successfully rescheduled!'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>  PickupOrders(userID: widget.custID),
+      switch (isIt) {
+          case true:
+            return AlertDialog(
+              title: const Text('Reschedule Confirmation'),
+              content: const Text(
+                'Order successfully rescheduled!',
+                style: TextStyle(
+                  color: Colors.green, // Set the text color to green
                 ),
-              );
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      );
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PickupOrders(user: widget.user),
+                      ),
+                    );
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          default:
+            return AlertDialog(
+              title: const Text('Reschedule Confirmation'),
+              content: const Text(
+                'Order failed to reschedule',
+                style: TextStyle(
+                  color: Colors.red, // Set the text color to green
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(
+                      context,
+                    );
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+        }
     },
   );
 }
@@ -203,3 +274,45 @@ class _RescheduleState extends State<Reschedule> {
     );
   }
 }
+
+Future<bool> saveOrderData({
+  required String orderID,
+  required int status,
+  required String orderType,
+  required String custID,
+  required String provID,
+  required double price,
+  required String address,
+  required List<String> preference,
+  required String shopImage,
+  required DateTime orderdate,
+  required DateTime pickupTime,
+}) async {
+  try {
+    final order = OrderModel(
+      orderID: orderID,
+      status: status,
+      orderType: orderType,
+      custID: custID,
+      provID: provID,
+      price: price,
+      address: address,
+      preference: preference,
+      shopImage: shopImage,
+      orderdate: orderdate,
+      pickupTime: pickupTime,
+    );
+
+    await HiveCRUD.updateOrder(order.orderID, order);
+
+    // Return true if the update was successful
+    return true;
+  } catch (e) {
+    // Log the error or handle it as needed
+    print('Error updating order data: $e');
+
+    // Return false to indicate failure
+    return false;
+  }
+}
+

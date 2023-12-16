@@ -5,21 +5,29 @@ import 'package:laundry_app/screens/chat.dart';
 import '../screens/profile.dart';
 import '../utils/app_color.dart';
 import '../utils/app_image.dart';
+import '../utils/user_model.dart';
 
 
 class DeliveryBottomBar extends StatefulWidget {
-  const DeliveryBottomBar({Key? key}) : super(key: key);
+  final UserModel user; 
+  const DeliveryBottomBar({Key? key, required this.user}) : super(key: key);
 
   @override
   State<DeliveryBottomBar> createState() => _DeliveryBottomBarState();
 }
 
 class _DeliveryBottomBarState extends State<DeliveryBottomBar> {
-  List<Widget> screenList = [
-    const DeliveryHome(),
-    const Chat(),
-    const Profile(),
-  ];
+     late List<Widget> screenList;
+
+  @override
+  void initState() {
+    super.initState();
+    screenList = [
+      const DeliveryHome(),
+      const Chat(),
+      Profile(user: widget.user),
+    ];
+  }
 
   void onItemTapped(int index) {
     setState(() {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../utils/user_model.dart';
 import 'rate.dart';
 import 'payment_method_screen.dart'; 
 
 class Notifications extends StatelessWidget {
-  const Notifications({Key? key});
+  final UserModel user; 
+  const Notifications({Key? key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class Notifications extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PaymentMethodScreen(totalAmount: totalAmount),
+            builder: (context) => PaymentMethodScreen(totalAmount: totalAmount, user: user,),
           ),
         );
       },

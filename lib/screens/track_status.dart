@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/user_model.dart';
 import 'track_rider.dart';
 
 class OrderStatus {
@@ -10,6 +11,7 @@ class OrderStatus {
 }
 
 class OrderTracking extends StatelessWidget {
+  final UserModel user; 
   final List<OrderStatus> orderStatusList = [
     OrderStatus(status: 'Order placed', date: '2023-12-01'),
     OrderStatus(status: 'Preparing for pick up', date: '2023-12-02'),
@@ -24,7 +26,7 @@ class OrderTracking extends StatelessWidget {
     OrderStatus(status: 'Order has been delivered', date: '2023-12-11'),
   ];
 
-  OrderTracking({Key? key}) : super(key: key);
+  OrderTracking({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,8 @@ class OrderTracking extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const TrackRider(
+                builder: (context) =>  TrackRider(
+                  user: user,
                   riderName: 'Christian Reyes', 
                   phoneNumber: '09218280965',
                   image: 'assets/driver.jpg'),

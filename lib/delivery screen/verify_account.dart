@@ -3,10 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:laundry_app/delivery%20screen/delivery_signup.dart';
+import '../utils/user_model.dart';
 import 'delivery_bottom_bar.dart';
 
 class VerifyAccount extends StatefulWidget {
-  const VerifyAccount({Key? key}) : super(key: key);
+  final UserModel user; 
+  const VerifyAccount({Key? key, required this.user}) : super(key: key);
 
   @override
   _VerifyAccountState createState() => _VerifyAccountState();
@@ -81,7 +83,7 @@ class _VerifyAccountState extends State<VerifyAccount> {
                           onTap: () {
                             Navigator.push( context, MaterialPageRoute(
                                       builder: (context) =>
-                                          const DeliverySignup()),
+                                           DeliverySignup(user: widget.user)),
                                 );
                           },
                           child: const Icon(Icons.arrow_back_ios_new_outlined,
@@ -313,7 +315,7 @@ class _VerifyAccountState extends State<VerifyAccount> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DeliveryBottomBar(),
+                                    builder: (context) =>  DeliveryBottomBar(user: widget.user),
                                   ),
                                 );
                               },

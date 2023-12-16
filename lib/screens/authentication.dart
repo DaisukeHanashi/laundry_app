@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../utils/user_model.dart';
 import 'success.dart';
 
 class AuthenticatorToggleScreen extends StatefulWidget {
-  const AuthenticatorToggleScreen({Key? key}) : super(key: key);
+  final UserModel user; 
+  const AuthenticatorToggleScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   _AuthenticatorToggleScreenState createState() => _AuthenticatorToggleScreenState();
@@ -72,7 +74,7 @@ class _AuthenticatorToggleScreenState extends State<AuthenticatorToggleScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Success()),
+                    MaterialPageRoute(builder: (context) => Success(user: widget.user)),
                   );
                 },
                 child: const Text('OK'),

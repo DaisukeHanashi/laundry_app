@@ -5,12 +5,44 @@ import '../utils/hive_crud.dart';
 import '../utils/user_model.dart';
 import 'sign_up.dart';
 
-class Login extends StatelessWidget {
-  final String email;
-  final String password;
+class Login extends StatefulWidget {
 
-  const Login({Key? key, required this.email, required this.password})
+ Login({Key? key,})
       : super(key: key);
+
+@override
+_LoginState createState() => _LoginState(); 
+
+}
+
+class _LoginState extends State<Login> {
+  late String email; 
+  late String password; 
+  TextEditingController emailController =  TextEditingController(); 
+  TextEditingController passwordController = TextEditingController();
+
+ 
+  UserModel findUser(List<UserModel> userList, String email, String password) {
+    for (var user in userList) {
+      if (user.email == email && user.password == password) {
+        return user;
+      }
+    }
+
+    return UserModel(
+      user_id: '123',
+      name: 'Guest',
+      email: email,
+      phoneNumber: '',
+      password: password,
+    );
+  }
+
+  void updateEmail(String value) {
+    setState(() {
+      email = value; // Update the email variable when the text changes
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,38 +98,42 @@ class Login extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 30),
-                            const Text(
-                              'Email',
-                              style: TextStyle(
-                                fontFamily: 'Garet-Book',
-                                fontSize: 15,
-                                color: Colors.black,
-                              ),
-                            ),
+                            // const Text(
+                            //   'Email',
+                            //   style: TextStyle(
+                            //     fontFamily: 'Garet-Book',
+                            //     fontSize: 15,
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
                             const SizedBox(height: 5),
-                            const SizedBox(
+                             SizedBox(
                               width: 280,
                               height: 40,
                               child: TextField(
-                                decoration: InputDecoration(
+                                controller: emailController,
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
+                                  labelText: 'Email',
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'Password',
-                              style: TextStyle(
-                                fontFamily: 'Garet-Book',
-                                fontSize: 15,
-                                color: Colors.black,
-                              ),
-                            ),
+                             const SizedBox(height: 20),
+                            // const Text(
+                            //   'Password',
+                            //   style: TextStyle(
+                            //     fontFamily: 'Garet-Book',
+                            //     fontSize: 15,
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
                             const SizedBox(height: 5),
-                            const SizedBox(
+                             SizedBox(
                               width: 280,
                               height: 40,
-                              child: PasswordField(),
+                              child: PasswordField(
+                               controller: passwordController,
+                              ),
                             ),
                             Padding(
                               padding:
@@ -125,29 +161,41 @@ class Login extends StatelessWidget {
                               onTap: () async {
                                 final userList = await HiveCRUD.getUsers();
 
-                                final user = userList.firstWhere(
-                                  (user) => user.email == email && user.password == password,
-                                  orElse: () => UserModel(
-                                    user_id: BigInt.from(0.9999), 
-                                    name: 'Guest',
-                                    email: email,
-                                    phoneNumber: '',
-                                    password: password,
-                                  ),
-                                );
+                                final user =
+                                    findUser(userList, emailController.text, passwordController.text);
 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Home(
-                                     userId: user.user_id,
-                                      userName: user.name,
-                                      userEmail: user.email,
-                                      userPhoneNumber: user.phoneNumber,
-                                      
+                                if (user.name == 'Guest') {
+                                  // Show invalid access dialog
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('Invalid Access'),
+                                        content: Text(
+                                            'Invalid email or password. Please try again.'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('OK'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  // Proceed with navigating to Home
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Home(
+                                        user: user,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -266,36 +314,32 @@ class Login extends StatelessWidget {
 }
 
 class PasswordField extends StatefulWidget {
-  const PasswordField({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const PasswordField({Key? key, required this.controller}) : super(key: key);
 
   @override
   _PasswordFieldState createState() => _PasswordFieldState();
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isPasswordVisible = false;
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 280,
-      height: 40,
-      child: TextField(
-        controller: _passwordController,
-        obscureText: !_isPasswordVisible,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          suffixIcon: IconButton(
-            icon: Icon(
-              _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-            ),
-            onPressed: () {
-              setState(() {
-                _isPasswordVisible = !_isPasswordVisible;
-              });
-            },
-          ),
+    return TextField(
+      controller: widget.controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'Password',
+        suffixIcon: IconButton(
+          icon: Icon(obscureText ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              obscureText = !obscureText;
+            });
+          },
         ),
       ),
     );

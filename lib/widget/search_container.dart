@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/laundry_shop.dart';
 
 class SearchContainer extends StatefulWidget {
-  final BigInt userID;
+  final String userID;
 
   const SearchContainer({super.key, required this.userID}); 
    @override

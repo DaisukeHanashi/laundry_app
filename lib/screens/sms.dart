@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../utils/user_model.dart';
 import 'success.dart';
 
 class SMSToggleScreen extends StatefulWidget {
-  const SMSToggleScreen({Key? key}) : super(key: key);
+  final UserModel user; 
+  const SMSToggleScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   _SMSToggleScreenState createState() => _SMSToggleScreenState();
@@ -71,7 +73,7 @@ class _SMSToggleScreenState extends State<SMSToggleScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Success()),
+                    MaterialPageRoute(builder: (context) => Success(user: widget.user)),
                   );
                 },
                 child: const Text('OK'),
